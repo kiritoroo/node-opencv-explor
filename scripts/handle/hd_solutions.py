@@ -6,7 +6,7 @@ class SolutionsHandle:
   def __init__(self, solutons_folder_path: str) -> None:
     self.solutons_folder_path = solutons_folder_path
     self.solutions = list[Solution]()
-    self.solutions_count = 0
+    self.solution_count = 0
 
     self.scale_ratio = 1
     self.position = pygame.math.Vector2(0,0)
@@ -17,7 +17,8 @@ class SolutionsHandle:
     self.read_solutions(self.solutons_folder_path)
 
   def draw_all(self, surface: pygame.Surface) -> None:
-    pass
+    for i in range(self.solution_count):
+      self.solutions[i].draw(surface)
 
   def update_all(self, delta_time: float) -> None:
     pass
@@ -29,9 +30,9 @@ class SolutionsHandle:
     self.solutons_folder_path = solutons_folder_path
     for _file_name in os.listdir(self.solutons_folder_path):
       if _file_name.endswith('.json'):
-        self.solutions_count += 1
+        self.solution_count += 1
         _solution_path = os.path.join(self.solutons_folder_path, _file_name)
-        _solution_name = f'Solution {self.solutions_count}'
+        _solution_name = f'Solution {self.solution_count}'
         _solution = Solution(_solution_name, _solution_path)
         self.solutions.append(_solution)
 

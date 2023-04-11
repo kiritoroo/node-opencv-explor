@@ -7,13 +7,14 @@ class Frame:
     self.surface = surface
     self.scale_ratio = 1
     self.handle_solutions = SolutionsHandle(ats.SOLUTION_FOLDER_PATH)
-    self.init()
 
-  def init(self):
+    self.start()
+
+  def start(self):
     pass
-
+  
   def render(self, surface: pygame.Surface) -> None:
-    pass
+    self.handle_solutions.draw_all(surface)
 
   def update(self, delta_time: str) -> None:
     pass

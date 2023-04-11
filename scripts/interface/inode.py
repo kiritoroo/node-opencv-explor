@@ -3,20 +3,23 @@ import pygame
 
 class INode(ABC):
   node_name: str
+
+  scale_ratio: float
   size: pygame.Rect
   position: pygame.math.Vector2
-  scale_ratio: float
-
+  text_size: int
   font: pygame.font.Font
   color_bg: pygame.Color
   color_text: pygame.Color
 
-  surf_container: pygame.Surface
-  rect_container: pygame.Rect
-  surf_node: pygame.Surface
-  rect_node: pygame.Rect
   surf_text: pygame.Surface
+  rect_node: pygame.Rect
   rect_text: pygame.Rect
+  rect_container: pygame.Rect
+
+  @abstractmethod
+  def start(self):
+    pass
 
   @abstractmethod
   def draw(self, surface: pygame.Surface) -> None:
@@ -28,4 +31,8 @@ class INode(ABC):
 
   @abstractmethod
   def events(self, event: pygame.event.Event) -> None:
+    pass
+
+  @abstractmethod
+  def set_position(self, position: pygame.math.Vector2) -> None:
     pass

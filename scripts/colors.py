@@ -3,6 +3,14 @@ import pygame
 WHITE=pygame.Color(255, 255, 255)
 BLACK=pygame.Color(0, 0, 0)
 
+NODE_TEXT_COLOR=pygame.Color(36, 36, 36)
+NODE_DEFAULT_COLOR=pygame.Color(241, 243, 244)
 NODE_BASE_BG_COLOR=pygame.Color(228, 228, 228)
 NODE_FILTERING_BG_COLOR=pygame.Color(253, 234, 185)
 NODE_MORPHOLOGY_BG_COLOR=pygame.Color(198, 227, 248)
+
+NODE_DETAIL_BG_COLOR=pygame.Color(255, 255, 255)
+NODE_DETAIL_BORDER_COLOR=pygame.Color(80, 80, 80)
+
+SOLUTION_TEXT_COLOR=pygame.Color(36, 36, 36)
+SOLUTION_BG_COLOR=pygame.Color(241, 243, 244)

@@ -1,5 +1,5 @@
-IMAGE_FOLDOER_PATH='./assets/images'
-IMAE_DEFAULT_PATH= f'{IMAGE_FOLDOER_PATH}/image_default.jpg'
+IMAGE_FOLDER_PATH='./assets/images'
+IMAGE_DEFAULT_PATH= f'{IMAGE_FOLDER_PATH}/image_default.jpg'
 
 FONT_FOLDER_PATH='./assets/fonts'
 FONT_POPPINS_LIGHT_PATH=f'{FONT_FOLDER_PATH}/poppins_light.ttf'

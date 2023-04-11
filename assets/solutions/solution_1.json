@@ -4,5 +4,17 @@
     "type": "original",
     "name": "Original",
     "params": {}
+  },
+  "2": {
+    "category": "morphology",
+    "type": "close",
+    "name": "Close",
+    "params": {}
+  },
+  "3": {
+    "category": "morphology",
+    "type": "close",
+    "name": "Close",
+    "params": {}
   }
 }
