@@ -1,0 +1,12 @@
+{
+  "1": {
+    "category": "base",
+    "type": "original",
+    "params": {}
+  },
+  "2": {
+    "category": "base",
+    "type": "grayscale",
+    "params": {}
+  }
+}
