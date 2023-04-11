@@ -189,5 +189,10 @@ class LinkedList(ILinkedList):
     else:
       current_node = self.first
       while current_node is not None:
-        print(f'[{current_node.get_node_prev()} -> {current_node} -> {current_node.get_node_next()}]\n')
+        prev_node = current_node.get_node_prev()
+        prev_hex = hex(id(prev_node)) if prev_node is not None else None
+        current_hex = hex(id(current_node))
+        next_node = current_node.get_node_next()
+        next_hex = hex(id(next_node)) if next_node is not None else None
+        print(f'[{prev_hex} -> {current_hex} -> {next_hex}]\n')
         current_node = current_node.next

@@ -1,11 +1,20 @@
 import pygame
-from scripts.interface.isolution import ISolution
+import os
+from scripts.core.solution import Solution
 
 class SolutionsHandle:
-  def __init__(self) -> None:
+  def __init__(self, solutons_folder_path: str) -> None:
+    self.solutons_folder_path = solutons_folder_path
+    self.solutions = list[Solution]()
+    self.solutions_count = 0
+
     self.scale_ratio = 1
     self.position = pygame.math.Vector2(0,0)
-    self.solutions = list[ISolution]
+
+    self.start()
+
+  def start(self):
+    self.read_solutions(self.solutons_folder_path)
 
   def draw_all(self, surface: pygame.Surface) -> None:
     pass
@@ -16,8 +25,15 @@ class SolutionsHandle:
   def events_all(self, event: pygame.event.Event) -> None:
     pass
 
-  def read_solutions(self) -> None:
-    pass
+  def read_solutions(self, solutons_folder_path: str) -> None:
+    self.solutons_folder_path = solutons_folder_path
+    for _file_name in os.listdir(self.solutons_folder_path):
+      if _file_name.endswith('.json'):
+        self.solutions_count += 1
+        _solution_path = os.path.join(self.solutons_folder_path, _file_name)
+        _solution_name = f'Solution {self.solutions_count}'
+        _solution = Solution(_solution_path, _solution_name)
+        self.solutions.append(_solution)
 
   def write_solutions(self) -> None:
     pass
