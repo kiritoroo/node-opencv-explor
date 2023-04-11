@@ -32,7 +32,7 @@ class SolutionsHandle:
         self.solutions_count += 1
         _solution_path = os.path.join(self.solutons_folder_path, _file_name)
         _solution_name = f'Solution {self.solutions_count}'
-        _solution = Solution(_solution_path, _solution_name)
+        _solution = Solution(_solution_name, _solution_path)
         self.solutions.append(_solution)
 
   def write_solutions(self) -> None:

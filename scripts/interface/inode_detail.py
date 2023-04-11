@@ -4,6 +4,7 @@ import pygame
 from scripts.interface.inode import INode
 
 class INodeDetail(ABC):
+  node_name: str
   node: INode
   image_raw: np.matrix
   image_apply: np.matrix
@@ -11,7 +12,7 @@ class INodeDetail(ABC):
   size_current: pygame.Rect
   position: pygame.math.Vector2
   scale_ratio: float
-  
+
   color_bg: pygame.Color
   color_border: pygame.Color
 

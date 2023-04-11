@@ -6,8 +6,8 @@ from scripts.handle.hd_nodes_detail import NodesDetailHandle
 from scripts.structure.str_linked_list import LinkedList
 
 class ISolution(ABC):
-  solution_path: str
   solution_name: str
+  solution_path: str
   solution_dict: dict
   nodes_data: LinkedList
   nodes_data_count: int

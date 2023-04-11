@@ -2,10 +2,11 @@ from abc import ABC, abstractmethod
 import pygame
 
 class INode(ABC):
+  node_name: str
   size: pygame.Rect
   position: pygame.math.Vector2
   scale_ratio: float
-  
+
   font: pygame.font.Font
   color_bg: pygame.Color
   color_text: pygame.Color
