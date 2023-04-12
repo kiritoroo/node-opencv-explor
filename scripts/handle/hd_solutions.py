@@ -38,6 +38,7 @@ class SolutionsHandle:
         self.solutions.append(_solution)
 
     self.reset_all_position()
+    self.reset_all_scale_ratio()
 
   def write_solutions(self) -> None:
     pass
@@ -58,7 +59,16 @@ class SolutionsHandle:
       _new_position.x = self.solutions[i].position_nodes_detail.x + _padding_horizontal
       _new_position.y = self.solutions[i].position_nodes_detail.y + _padding_vertical
 
+  def reset_all_scale_ratio(self) -> None:
+    for i in range(self.solution_count):
+      self.solutions[i].set_scale_ratio(self.scale_ratio)
+
   def move(self, offset: pygame.math.Vector2) -> None:
     self.position.x += offset.x
     self.position.y += offset.y
     self.reset_all_position()
+
+  def zoom(self, scale_ratio) -> None:
+    self.scale_ratio = float(scale_ratio)
+    self.reset_all_scale_ratio()
+    

@@ -148,12 +148,15 @@ class Solution(ISolution):
     self.handle_nodes_detail.set_position(self.position_nodes_detail.copy())
 
   def reset_scale_ratio(self) -> None:
-    self.handle_nodes.set_scale_ratio(self.scale_ratio)
     self.handle_nodes_detail.set_scale_ratio(self.scale_ratio)
 
   def set_position_nodes_detail(self, position: pygame.math.Vector2) -> None:
-    self.position_nodes_detail = position
+    self.position_nodes_detail = position.copy()
     self.reset_position()
     self._config_rect_container_node_detail()
     self._config_rect_label_node_detail()
     self._config_text_label_node_detail()
+
+  def set_scale_ratio(self, scale_ratio: float) -> None:
+    self.scale_ratio = float(scale_ratio)
+    self.reset_scale_ratio()

@@ -41,7 +41,7 @@ class NodesHandle:
       _new_position.y = self.list_node[i].position.y + _padding_vertical
 
   def set_position(self, position: pygame.math.Vector2) -> None:
-    self.position = position
+    self.position = position.copy()
     self.reset_all_position()
 
   def reset_all_scale_ratio(self) -> None:
@@ -49,5 +49,5 @@ class NodesHandle:
       self.list_node[i].set_scale_ratio(self.scale_ratio)
 
   def set_scale_ratio(self, scale_ratio: float) -> None:
-    self.scale_ratio = scale_ratio
+    self.scale_ratio = float(scale_ratio)
     self.reset_all_scale_ratio()

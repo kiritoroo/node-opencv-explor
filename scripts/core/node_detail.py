@@ -66,7 +66,7 @@ class NodeDetail(INodeDetail):
     pass
 
   def set_position(self, position: pygame.math.Vector2) -> None:
-    self.position = position
+    self.position = position.copy()
     
     self.rect_image = self.surf_image.get_rect(center=self.position)
 

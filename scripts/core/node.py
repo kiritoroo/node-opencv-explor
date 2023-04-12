@@ -45,7 +45,7 @@ class Node(INode):
     pass
   
   def set_position(self, position: pygame.math.Vector2) -> None:
-    self.position = position
+    self.position = position.copy()
 
     self.rect_node.left = self.position.x-self.size.width/2 
     self.rect_node.top = self.position.y-self.size.height/2
@@ -55,7 +55,7 @@ class Node(INode):
   def set_scale_ratio(self, scale_ratio: float) -> None:
     self.scale_ratio = scale_ratio
     self.size.width = self.size_default.width*self.scale_ratio
-    self.size.height = self.size.height*self.scale_ratio
+    self.size.height = self.size_default.height*self.scale_ratio
     
     self.rounded_size = int(self.rounded_size*self.scale_ratio)
     self.rect_node.left = self.position.x-self.size.width/2
