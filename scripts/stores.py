@@ -2,6 +2,8 @@ import cv2 as cv
 import numpy as np
 import assets.assets as ats
 
+scale_ratio: float = 1
+
 def load_image_cv_default() -> np.matrix:
   image_cv = cv.imread(ats.IMAGE_DEFAULT_PATH)
   image_cv = cv.transpose(image_cv)

@@ -10,11 +10,5 @@
     "type": "gaussian",
     "name": "Gaussian",
     "params": {}
-  },
-  "3": {
-    "category": "morphology",
-    "type": "close",
-    "name": "Close",
-    "params": {}
   }
 }

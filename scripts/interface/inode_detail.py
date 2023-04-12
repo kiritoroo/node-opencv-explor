@@ -11,6 +11,7 @@ class INodeDetail(ABC):
 
   scale_ratio: float
   position: pygame.math.Vector2
+  image_width_default: int
   image_width: int
   image_height: int
   color_bg: pygame.Color
@@ -44,3 +45,7 @@ class INodeDetail(ABC):
   @abstractmethod
   def set_position(self, position: pygame.math.Vector2) -> None:
     pass
+
+  @abstractmethod
+  def set_scale_ratio(self, scale_ratio: float) -> None:
+    pass 

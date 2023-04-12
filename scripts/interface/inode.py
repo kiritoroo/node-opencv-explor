@@ -5,12 +5,14 @@ class INode(ABC):
   node_name: str
 
   scale_ratio: float
+  size_default: pygame.Rect
   size: pygame.Rect
   position: pygame.math.Vector2
   text_size: int
   font: pygame.font.Font
   color_bg: pygame.Color
   color_text: pygame.Color
+  rounded_size: int
 
   surf_text: pygame.Surface
   rect_node: pygame.Rect
@@ -35,4 +37,8 @@ class INode(ABC):
 
   @abstractmethod
   def set_position(self, position: pygame.math.Vector2) -> None:
+    pass
+
+  @abstractmethod
+  def set_scale_ratio(self, scale_ratio: float) -> None:
     pass

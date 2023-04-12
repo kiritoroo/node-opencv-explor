@@ -23,9 +23,8 @@ class ISolution(ABC):
   font: pygame.font.Font
   color_bg: pygame.Color
   color_text: pygame.Color
+  color_arrow: pygame.Color
 
-  surf_solution_node: pygame.Surface
-  surf_solution_node_detail: pygame.Surface
   surf_text: pygame.Surface
   rect_solution_node: pygame.Rect
   rect_solution_node_detail: pygame.Rect
@@ -67,4 +66,8 @@ class ISolution(ABC):
   
   @abstractmethod
   def reset_position(self) -> None:
+    pass
+
+  @abstractmethod
+  def reset_scale_ratio(self) -> None:
     pass

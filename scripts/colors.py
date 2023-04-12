@@ -3,6 +3,8 @@ import pygame
 WHITE=pygame.Color(255, 255, 255)
 BLACK=pygame.Color(0, 0, 0)
 
+ARROW_COLOR=pygame.Color(222, 151, 216)
+
 NODE_TEXT_COLOR=pygame.Color(36, 36, 36)
 NODE_DEFAULT_COLOR=pygame.Color(241, 243, 244)
 NODE_BASE_BG_COLOR=pygame.Color(228, 228, 228)
@@ -14,3 +16,5 @@ NODE_DETAIL_BORDER_COLOR=pygame.Color(80, 80, 80)
 
 SOLUTION_TEXT_COLOR=pygame.Color(36, 36, 36)
 SOLUTION_BG_COLOR=pygame.Color(241, 243, 244)
+SOLUTION_LABEL_COLOR=pygame.Color(134, 217, 185)
+SOLUTION_LABEL_TEXT_COLOR=pygame.Color(36, 36, 36)
