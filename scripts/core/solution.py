@@ -29,7 +29,6 @@ class Solution():
 
   def __config_variables(self):
     self.scale_ratio = sts.scale_ratio
-    self.list_rect_area_bouding_box= [pygame.Rect(0,0,0,0) for _ in range(self.handle_nodes_detail.node_detail_cout)]
 
     self.position_nodes = pygame.math.Vector2(1600, 100)
     self.position_nodes_detail = pygame.math.Vector2(0, 0)
@@ -88,6 +87,7 @@ class Solution():
     self.rect_text_label_node_detail=self.surf_text_label_node_detail.get_rect(center=(self.rect_label_node_detail.center))
 
   def __config_rects_add_area_bounding_box(self):
+    self.list_rect_area_bouding_box= [pygame.Rect(0,0,0,0) for _ in range(self.handle_nodes_detail.node_detail_cout)]
     _padding_horizontal = self.handle_nodes_detail.list_node_detail[1].rect_container.left-self.handle_nodes_detail.list_node_detail[0].rect_container.right
     _padding_vertical = self.handle_nodes_detail.list_node_detail[0].rect_container.height/2
     _bounding_box_width = self.handle_nodes_detail.list_node_detail[1].rect_container.left-self.handle_nodes_detail.list_node_detail[0].rect_container.right+_padding_horizontal
@@ -120,12 +120,10 @@ class Solution():
     self.__config_rects_add_area_bounding_box()
     self.__config_ui_elements()
     self.__config_ui_btn_add_list()
-    self._reset_scale_ratio()
 
   def draw(self, surface: pygame.Surface) -> None:
     uts.draw_rect_rounded(surface, self.rect_container_node_detail, self.color_bg, self.current_size_rounded_container)
     self.handle_nodes_detail.draw_all(surface)
-    self.handle_nodes.draw_all(surface)
     uts.draw_rect_rounded(surface, self.rect_label_node_detail, self.color_bg_label_node_detail, self.current_size_rounded_label)
     surface.blit(self.surf_text_label_node_detail, self.rect_text_label_node_detail)
     self.ui_manager.draw_ui(surface)
@@ -141,6 +139,25 @@ class Solution():
 
   def events(self, event: pygame.event.Event) -> None:
     self.ui_manager.process_events(event)
+
+    if event.type == pygame_gui.UI_BUTTON_PRESSED:
+      for i in range(len(self.ui_btn_add_list)):
+        if event.ui_element == self.ui_btn_add_list[i]:
+          _node_data = NodeData("morphology", "close", "Close", [])
+          self.nodes_data.add(i+1, _node_data)
+          self.node_data_count += 1
+          _list_node = self._get_nodes()
+          _list_node_detail = self._get_nodes_detail() 
+          self.handle_nodes = NodesHandle(_list_node)
+          self.handle_nodes_detail = NodesDetailHandle(_list_node_detail)
+          self.__config_ui_elements()
+          self._reset_scale_ratio()
+          self._reset_position()
+          self.__config_rect_container_node_detail()
+          self.__config_rect_label_node_detail()
+          self.__config_text_label_node_detail()
+          self.__config_rects_add_area_bounding_box()
+          self.__config_ui_btn_add_list()
 
   def read_solution(self, solution_path) -> None:
     self.solution_path = solution_path

@@ -16,7 +16,7 @@ class SolutionsHandle:
     self.position = pygame.math.Vector2(300, 250)
 
     self.default_padding_horizontal = 0
-    self.default_padding_vertical = self.solutions[0].rect_container_node_detail.height + 80
+    self.default_padding_vertical = 340
 
     self.current_padding_horizontal = float(self.default_padding_horizontal)
     self.current_padding_vertical = float(self.default_padding_vertical)
@@ -30,6 +30,7 @@ class SolutionsHandle:
   def draw_all(self, surface: pygame.Surface) -> None:
     for i in range(self.solution_count):
       self.solutions[i].draw(surface)
+    self.solutions[i].handle_nodes.draw_all(surface)
 
   def update_all(self, delta_time: float) -> None:
     for i in range(self.solution_count):

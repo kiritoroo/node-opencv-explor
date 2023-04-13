@@ -21,7 +21,7 @@ class Frame:
     _rect.topright = (-80, 20)
     self.ui_txt_zoom_percent = pygame_gui.elements.ui_label.UILabel(relative_rect=_rect,
               text=f'{int(self.scale_ratio*100)}%', manager=self.ui_manager,
-              object_id=pygame_gui.core.ObjectID(class_id="txt"),
+              object_id=pygame_gui.core.ObjectID(class_id="#txt"),
               anchors={'top': 'top',
                       'right': 'right'})
 
@@ -67,11 +67,11 @@ class Frame:
     self.handle_solutions.events_all(event)
 
     if event.type == pygame_gui.UI_BUTTON_PRESSED:
-      if event.ui_element == self.ui_btn_zoomout:
+      if event.ui_element == self.ui_btn_zoomin:
         if self.scale_ratio < 5:
           self.scale_ratio += (0.2 * self.scale_ratio)
           self._zoom_handle()
-      if event.ui_element == self.ui_btn_zoomin:
+      if event.ui_element == self.ui_btn_zoomout:
         if self.scale_ratio > 0.5:
           self.scale_ratio -= (0.2 * self.scale_ratio)
           self._zoom_handle()
@@ -84,5 +84,6 @@ class Frame:
       self._zoom_handle()
 
   def _zoom_handle(self):
+    sts.scale_ratio = float(self.scale_ratio)
     self.handle_solutions.zoom(self.scale_ratio)
     self.ui_txt_zoom_percent.set_text(f'{int(self.scale_ratio*100)}%')

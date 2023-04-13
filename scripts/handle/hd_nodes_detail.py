@@ -15,7 +15,7 @@ class NodesDetailHandle:
     self.scale_ratio = sts.scale_ratio
     self.position = pygame.math.Vector2(0,0)
 
-    self.default_padding_horizontal = self.list_node_detail[0].rect_container.width + 50
+    self.default_padding_horizontal = 350
     self.default_padding_vertical = 0
     self.default_size_border_arrow = 2
     self.default_length_arrow = 0
