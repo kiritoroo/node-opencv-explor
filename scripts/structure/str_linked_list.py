@@ -1,4 +1,4 @@
-from scripts.interface.ilinked_list import ILinkedList
+from scripts.structure.ilinked_list import ILinkedList
 from scripts.structure.str_node import StrNode
 
 class LinkedList(ILinkedList):
@@ -122,7 +122,7 @@ class LinkedList(ILinkedList):
     return self.last.get_item()
   
   def set(self, index: int, item: any) -> None:
-    self._check_element_index()
+    self._check_element_index(index)
     self._node(index).set_item(item)
 
   def set_fist(self, item: any) -> None:

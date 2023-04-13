@@ -30,8 +30,8 @@ class Frame:
 
   def events(self, event: pygame.event.Event) -> None:
     if event.type == pygame.MOUSEWHEEL:
-      if event.y == 1 and self.scale_ratio < 3:
-        self.scale_ratio += 0.2
-      if event.y == -1 and self.scale_ratio > 0.6:
-        self.scale_ratio -= 0.2
+      if event.y == 1 and self.scale_ratio < 5:
+        self.scale_ratio += (0.15 * self.scale_ratio)
+      if event.y == -1 and self.scale_ratio > 0.5:
+        self.scale_ratio -= (0.15 * self.scale_ratio)
       self.handle_solutions.zoom(self.scale_ratio)
