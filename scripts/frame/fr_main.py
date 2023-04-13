@@ -48,7 +48,7 @@ class Frame:
     self.handle_solutions.draw_all(surface)
     self.ui_manager.draw_ui(surface)
 
-  def update(self, delta_time: str) -> None:
+  def update(self, delta_time: float) -> None:
     self.ui_manager.update(delta_time)
     self.handle_solutions.update_all(delta_time)
 

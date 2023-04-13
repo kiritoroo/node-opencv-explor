@@ -13,6 +13,7 @@ from scripts.core.node_detail import NodeDetail
 from scripts.core.node_data import NodeData
 from scripts.handle.hd_nodes import NodesHandle
 from scripts.handle.hd_nodes_detail import NodesDetailHandle
+from scripts.frame.components.comp_node_store import ComponentNodeStore
 
 class Solution():
   def __init__(self, solution_name: str, solution_path: str) -> None:
@@ -24,6 +25,8 @@ class Solution():
     self.node_data_count = 0
     self.handle_nodes: NodesHandle = None
     self.handle_nodes_detail: NodesDetailHandle = None
+
+    self.comp_node_store = ComponentNodeStore()
 
     self._start()
 
@@ -63,8 +66,7 @@ class Solution():
       _ui_btn_add = pygame_gui.elements.UIButton(relative_rect=_rect,
               text='+',
               manager=self.ui_manager,
-              object_id=pygame_gui.core.ObjectID(object_id="@btn_add_node", class_id="#btn"),
-              anchors={'center': 'center'})
+              object_id=pygame_gui.core.ObjectID(object_id="@btn_add_node", class_id="#btn"))
       _ui_btn_add.visible = False
       self.ui_btn_add_list.append(_ui_btn_add)
 
@@ -130,6 +132,7 @@ class Solution():
 
   def update(self, delta_time: float) -> None:
     self.ui_manager.update(delta_time)
+    self.comp_node_store.update(delta_time)
     _mouse_pos = pygame.mouse.get_pos()
     for i, rect in enumerate(self.list_rect_area_bouding_box):
       if rect.collidepoint(_mouse_pos):
@@ -139,25 +142,27 @@ class Solution():
 
   def events(self, event: pygame.event.Event) -> None:
     self.ui_manager.process_events(event)
+    self.comp_node_store.events(event)
 
     if event.type == pygame_gui.UI_BUTTON_PRESSED:
       for i in range(len(self.ui_btn_add_list)):
         if event.ui_element == self.ui_btn_add_list[i]:
-          _node_data = NodeData("morphology", "close", "Close", [])
-          self.nodes_data.add(i+1, _node_data)
-          self.node_data_count += 1
-          _list_node = self._get_nodes()
-          _list_node_detail = self._get_nodes_detail() 
-          self.handle_nodes = NodesHandle(_list_node)
-          self.handle_nodes_detail = NodesDetailHandle(_list_node_detail)
-          self.__config_ui_elements()
-          self._reset_scale_ratio()
-          self._reset_position()
-          self.__config_rect_container_node_detail()
-          self.__config_rect_label_node_detail()
-          self.__config_text_label_node_detail()
-          self.__config_rects_add_area_bounding_box()
-          self.__config_ui_btn_add_list()
+          self.comp_node_store.is_show = True
+          # _node_data = NodeData("morphology", "close", "Close", [])
+          # self.nodes_data.add(i+1, _node_data)
+          # self.node_data_count += 1
+          # _list_node = self._get_nodes()
+          # _list_node_detail = self._get_nodes_detail() 
+          # self.handle_nodes = NodesHandle(_list_node)
+          # self.handle_nodes_detail = NodesDetailHandle(_list_node_detail)
+          # self.__config_ui_elements()
+          # self._reset_scale_ratio()
+          # self._reset_position()
+          # self.__config_rect_container_node_detail()
+          # self.__config_rect_label_node_detail()
+          # self.__config_text_label_node_detail()
+          # self.__config_rects_add_area_bounding_box()
+          # self.__config_ui_btn_add_list()
 
   def read_solution(self, solution_path) -> None:
     self.solution_path = solution_path

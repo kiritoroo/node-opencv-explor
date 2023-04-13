@@ -30,7 +30,8 @@ class SolutionsHandle:
   def draw_all(self, surface: pygame.Surface) -> None:
     for i in range(self.solution_count):
       self.solutions[i].draw(surface)
-    self.solutions[i].handle_nodes.draw_all(surface)
+    for i in range(self.solution_count):
+      self.solutions[i].comp_node_store.draw(surface)
 
   def update_all(self, delta_time: float) -> None:
     for i in range(self.solution_count):

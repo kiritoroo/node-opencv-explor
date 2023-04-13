@@ -52,6 +52,20 @@
       "active_bg": "#EFE0E7"
     }
   },
+  "@btn_close_panel": {
+    "colours":
+    {
+      "active_bg": "#FCE3E5"
+    }
+  },
+  "@btn_category": {
+    "colours":
+    {
+      "normal_bg": "#F9F4F7",
+      "hovered_bg": "#EEF4FC",
+      "active_bg": "#EEF4FC"
+    }
+  },
   "#txt": {
     "colours":
     {
@@ -66,6 +80,49 @@
     "misc":
     {
         "text_shadow": "0"
+    }
+  },
+  "#panel": {
+    "colours":
+    {
+      "dark_bg":"#FEF2F2,#EFF6FF,#EFF6FF,90"
+    },
+    "misc":
+    {
+      "shape": "rounded_rectangle",
+      "shape_corner_radius": "10",
+      "border_width": "0",
+      "shadow_width": "0"
+    }
+  },
+  "tool_tip":
+  {
+    "misc":
+    {
+      "rect_width": "250"
+    }
+  },
+  "tool_tip.text_box": {
+    "colours":
+    {
+      "dark_bg":"#F9F4F7",
+      "normal_text": "#3C4048",
+      "normal_border": "#D2DDF3"
+    },
+    "font":
+    {
+      "name": "pro",
+      "size": "15",
+      "regular_resource": {
+        "package": "assets.fonts",
+        "resource": "pro_light.ttf"
+      }
+    },
+    "misc":
+    {
+      "shape": "rounded_rectangle",
+      "shape_corner_radius": "10",
+      "shadow_width": "0"
     }
   }
 }
