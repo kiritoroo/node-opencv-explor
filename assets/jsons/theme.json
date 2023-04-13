@@ -66,6 +66,22 @@
       "active_bg": "#EEF4FC"
     }
   },
+  "@btn_node_base": {
+    "colours":
+    {
+      "normal_bg": "#E1E7FF,#E4E4E4,20",
+      "hovered_bg": "#E1E7FF",
+      "active_bg": "#E4E4E4"
+    }
+  },
+  "@btn_node_filtering": {
+    "colours":
+    {
+      "normal_bg": "#E1E7FF,#EFE0E7,20",
+      "hovered_bg": "#E1E7FF",
+      "active_bg": "#EFE0E7"
+    }
+  },
   "#txt": {
     "colours":
     {
@@ -85,7 +101,7 @@
   "#panel": {
     "colours":
     {
-      "dark_bg":"#FEF2F2,#EFF6FF,#EFF6FF,90"
+      "dark_bg":"#FEF2F2,#F3F4F6,#F3F4F6,90"
     },
     "misc":
     {

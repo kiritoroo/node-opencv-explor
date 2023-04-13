@@ -1,0 +1,30 @@
+{
+  "1": {
+    "category": "filtering",
+    "type": "gaussian",
+    "name": "Gaussian",
+    "tooltip": "Gaussian Node đại diện cho hình ảnh sau khi áp dụng bộ lọc Gaussian, làm mờ hình ảnh bằng cách lấy giá trị trung bình của các điểm ảnh trong một vùng lân cận. Nó có thể được sử dụng cho các hoạt động làm mịn hoặc làm mờ hình ảnh.",
+    "params": {}
+  },
+  "2": {
+    "category": "filtering",
+    "type": "median",
+    "name": "Median",
+    "tooltip": "Median Node đại diện cho hình ảnh sau khi áp dụng bộ lọc Median, làm mờ hình ảnh bằng cách lấy giá trị trung vị của các điểm ảnh trong một vùng lân cận. Nó có thể được sử dụng cho các hoạt động làm mịn hoặc làm mờ hình ảnh.",
+    "params": {}
+  },
+  "3": {
+    "category": "filtering",
+    "type": "max",
+    "name": "Max",
+    "tooltip": "Max Node đại diện cho hình ảnh sau khi áp dụng bộ lọc Max, làm mờ hình ảnh bằng cách lấy giá trị lớn nhất của các điểm ảnh trong một vùng lân cận. Nó có thể được sử dụng cho các hoạt động làm mịn hoặc làm mờ hình ảnh.",
+    "params": {}
+  },
+  "4": {
+    "category": "filtering",
+    "type": "min",
+    "name": "Min",
+    "tooltip": "Min Node đại diện cho hình ảnh sau khi áp dụng bộ lọc Min, làm mờ hình ảnh bằng cách lấy giá trị nhỏ nhất của các điểm ảnh trong một vùng lân cận. Nó có thể được sử dụng cho các hoạt động làm mịn hoặc làm mờ hình ảnh.",
+    "params": {}
+  }
+}

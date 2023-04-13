@@ -26,12 +26,13 @@ class Solution():
     self.handle_nodes: NodesHandle = None
     self.handle_nodes_detail: NodesDetailHandle = None
 
-    self.comp_node_store = ComponentNodeStore()
+    self.comp_node_store = ComponentNodeStore(self)
 
     self._start()
 
   def __config_variables(self):
     self.scale_ratio = sts.scale_ratio
+    self.add_node_index = 0
 
     self.position_nodes = pygame.math.Vector2(1600, 100)
     self.position_nodes_detail = pygame.math.Vector2(0, 0)
@@ -147,22 +148,9 @@ class Solution():
     if event.type == pygame_gui.UI_BUTTON_PRESSED:
       for i in range(len(self.ui_btn_add_list)):
         if event.ui_element == self.ui_btn_add_list[i]:
-          self.comp_node_store.is_show = True
-          # _node_data = NodeData("morphology", "close", "Close", [])
-          # self.nodes_data.add(i+1, _node_data)
-          # self.node_data_count += 1
-          # _list_node = self._get_nodes()
-          # _list_node_detail = self._get_nodes_detail() 
-          # self.handle_nodes = NodesHandle(_list_node)
-          # self.handle_nodes_detail = NodesDetailHandle(_list_node_detail)
-          # self.__config_ui_elements()
-          # self._reset_scale_ratio()
-          # self._reset_position()
-          # self.__config_rect_container_node_detail()
-          # self.__config_rect_label_node_detail()
-          # self.__config_text_label_node_detail()
-          # self.__config_rects_add_area_bounding_box()
-          # self.__config_ui_btn_add_list()
+          self.add_node_index = i+1
+          self.comp_node_store.show()
+          return
 
   def read_solution(self, solution_path) -> None:
     self.solution_path = solution_path
@@ -200,8 +188,22 @@ class Solution():
       _list_node_detail.append(_node_detail)
     return _list_node_detail
 
-  def add_node_data(self) -> None:
-    pass
+  def add_node_data(self, node_catory: str, node_type: str, node_name: str, node_params: list) -> None:
+    _node_data = NodeData(node_catory, node_type, node_name, node_params)
+    self.nodes_data.add(self.add_node_index, _node_data)
+    self.node_data_count += 1
+    _list_node = self._get_nodes()
+    _list_node_detail = self._get_nodes_detail() 
+    self.handle_nodes = NodesHandle(_list_node)
+    self.handle_nodes_detail = NodesDetailHandle(_list_node_detail)
+    self.__config_ui_elements()
+    self._reset_scale_ratio()
+    self._reset_position()
+    self.__config_rect_container_node_detail()
+    self.__config_rect_label_node_detail()
+    self.__config_text_label_node_detail()
+    self.__config_rects_add_area_bounding_box()
+    self.__config_ui_btn_add_list()
 
   def remove_node_data(self) -> None:
     pass

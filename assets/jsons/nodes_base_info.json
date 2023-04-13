@@ -1,0 +1,16 @@
+{
+  "1": {
+    "category": "base",
+    "type": "original",
+    "name": "Original",
+    "tooltip": "Original Node đại diện cho hình ảnh đầu vào ban đầu mà không có bất kỳ sửa đổi nào.",
+    "params": {}
+  },
+  "2": {
+    "category": "base",
+    "type": "grayscale",
+    "name": "Grayscale",
+    "tooltip": "Grayscale Node chuyển đổi hình ảnh thành thang độ xám, chỉ chứa các sắc thái xám từ đen sang trắng.",
+    "params": {}
+  }
+}
