@@ -1,3 +1,5 @@
+THEME_PATH='./assets/theme.json'
+
 IMAGE_FOLDER_PATH='./assets/images'
 IMAGE_DEFAULT_PATH= f'{IMAGE_FOLDER_PATH}/image_default.jpg'
 

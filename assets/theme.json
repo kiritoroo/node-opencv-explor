@@ -1,0 +1,71 @@
+{
+  "#btn":
+  {
+    "colours":
+    {
+        "normal_bg": "#CEDEF7,#EFE0E7,20",
+        "hovered_bg": "#CEDEF7",
+        "normal_text": "#5A606C",
+        "hovered_text": "#5A606C"
+    },
+    "font":
+    {
+      "name": "poppins",
+      "size": "14",
+      "bold": "0",
+      "regular_resource": {
+        "package": "assets.fonts",
+        "resource": "poppins_regular.ttf"
+      },
+      "bold_resource": {
+        "package": "assets.fonts",
+        "resource": "poppins_medium.ttf"
+      }
+    },
+    "misc":
+    {
+      "shape": "rounded_rectangle",
+      "shape_corner_radius": "5",
+      "border_width": "0",
+      "shadow_width": "0",
+      "text_horiz_alignment": "center",
+      "text_vert_alignment": "center",
+      "text_horiz_alignment_padding": "0",
+      "text_vert_alignment_padding": "0",
+      "tool_tip_delay": "0.2",
+      "state_transitions":
+      {
+        "normal_hovered": "0.3",
+        "hovered_normal": "0.3"
+      }
+    }
+  },
+  "@btn_zoom": {
+    "colours":
+    {
+      "active_bg": "#EEF4FC,#F9F4F7,90"
+    }
+  },
+  "@btn_add_node": {
+    "colours":
+    {
+      "active_bg": "#EFE0E7"
+    }
+  },
+  "#txt": {
+    "colours":
+    {
+        "normal_text": "#5A606C"
+    },
+    "font":
+    {
+        "name": "poppins",
+        "size": "12",
+        "bold": "0"
+    },
+    "misc":
+    {
+        "text_shadow": "0"
+    }
+  }
+}

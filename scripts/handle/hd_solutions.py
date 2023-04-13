@@ -15,19 +15,29 @@ class SolutionsHandle:
     self.scale_ratio = sts.scale_ratio
     self.position = pygame.math.Vector2(300, 250)
 
+    self.default_padding_horizontal = 0
+    self.default_padding_vertical = self.solutions[0].rect_container_node_detail.height + 80
+
+    self.current_padding_horizontal = float(self.default_padding_horizontal)
+    self.current_padding_vertical = float(self.default_padding_vertical)
+
   def _start(self):
-    self.__config_variables()
     self.read_solutions(self.solutons_folder_path)
+    self.__config_variables()
+    self._reset_all_position()
+    self._reset_all_scale_ratio()
 
   def draw_all(self, surface: pygame.Surface) -> None:
     for i in range(self.solution_count):
       self.solutions[i].draw(surface)
 
   def update_all(self, delta_time: float) -> None:
-    pass
+    for i in range(self.solution_count):
+      self.solutions[i].update(delta_time)
 
   def events_all(self, event: pygame.event.Event) -> None:
-    pass
+    for i in range(self.solution_count):
+      self.solutions[i].events(event)
 
   def read_solutions(self, solutons_folder_path: str) -> None:
     self.solutons_folder_path = solutons_folder_path
@@ -39,9 +49,6 @@ class SolutionsHandle:
         _solution = Solution(_solution_name, _solution_path)
         self.solutions.append(_solution)
 
-    self._reset_all_position()
-    self._reset_all_scale_ratio()
-
   def write_solutions(self) -> None:
     pass
 
@@ -52,14 +59,11 @@ class SolutionsHandle:
     pass
 
   def _reset_all_position(self) -> None:
-    _padding_horizontal = 0
-    _padding_vertical = self.solutions[0].rect_container_node_detail.height + 50
     _new_position = self.position.copy()
-    
     for i in range(self.solution_count):
       self.solutions[i].set_position_nodes_detail(_new_position)
-      _new_position.x = self.solutions[i].position_nodes_detail.x + _padding_horizontal
-      _new_position.y = self.solutions[i].position_nodes_detail.y + _padding_vertical
+      _new_position.x = self.solutions[i].position_nodes_detail.x+self.current_padding_horizontal
+      _new_position.y = self.solutions[i].position_nodes_detail.y+self.current_padding_vertical
 
   def _reset_all_scale_ratio(self) -> None:
     for i in range(self.solution_count):
@@ -72,6 +76,8 @@ class SolutionsHandle:
 
   def zoom(self, scale_ratio) -> None:
     self.scale_ratio = float(scale_ratio)
+    self.current_padding_horizontal = float(self.default_padding_horizontal*self.scale_ratio)
+    self.current_padding_vertical = float(self.default_padding_vertical*self.scale_ratio)
     self._reset_all_scale_ratio()
     self._reset_all_position()
     

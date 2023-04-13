@@ -58,4 +58,4 @@ def draw_arrow(surface, start_pos: pygame.math.Vector2, end_pos: pygame.math.Vec
   triangle_left = end_pos[0] - arrow_width, end_pos[1] - arrow_width
   triangle_right = end_pos[0] - arrow_width, end_pos[1] + arrow_width
   pygame.draw.polygon(surface, color, [triangle_top, triangle_left, triangle_right])
-  pygame.draw.line(surface, color, start_pos, triangle_top, thickness)
+  pygame.draw.line(surface, color, start_pos, (triangle_top[0]-arrow_width, triangle_top[1]), thickness)

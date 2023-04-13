@@ -8,6 +8,7 @@ class NodesDetailHandle:
   def __init__(self, list_node_detail: list[NodeDetail]) -> None:
     self.list_node_detail = list_node_detail
     self.node_detail_cout = len(self.list_node_detail)
+
     self._start()
 
   def __config_variables(self):
@@ -29,15 +30,14 @@ class NodesDetailHandle:
     self.color_arrow = cls.ARROW_COLOR
 
   def _draw_arrow_node_detail(self, surface):
-    for i in range(self.node_detail_cout):
-      if i < self.node_detail_cout-1:
-        _arrow_start_pos = pygame.math.Vector2(
-          self.list_node_detail[i].rect_container.right,
-          self.list_node_detail[i].rect_container.y+self.list_node_detail[i].rect_container.height/2)
-        _arrow_end_pos = pygame.math.Vector2(
-          self.list_node_detail[i+1].rect_container.left-self.current_length_arrow,
-          self.list_node_detail[i].rect_container.y+self.list_node_detail[i].rect_container.height/2)
-        uts.draw_arrow(surface, _arrow_start_pos, _arrow_end_pos, self.current_width_arrow, self.current_length_arrow, self.color_arrow, self.current_size_border_arrow)
+    for i in range(self.node_detail_cout-1):
+      _arrow_start_pos = pygame.math.Vector2(
+        self.list_node_detail[i].rect_container.right,
+        self.list_node_detail[i].rect_container.y+self.list_node_detail[i].rect_container.height/2)
+      _arrow_end_pos = pygame.math.Vector2(
+        self.list_node_detail[i+1].rect_container.left,
+        self.list_node_detail[i].rect_container.y+self.list_node_detail[i].rect_container.height/2)
+      uts.draw_arrow(surface, _arrow_start_pos, _arrow_end_pos, self.current_width_arrow, self.current_length_arrow, self.color_arrow, self.current_size_border_arrow)
 
   def _start(self):
     self.__config_variables()
@@ -61,11 +61,10 @@ class NodesDetailHandle:
 
   def _reset_all_position(self) -> None:
     _new_position = self.position.copy()
-    
     for i in range(self.node_detail_cout):
       self.list_node_detail[i].set_position(_new_position)
-      _new_position.x = self.list_node_detail[i].position.x + self.current_padding_horizontal
-      _new_position.y = self.list_node_detail[i].position.y + self.current_padding_vertical
+      _new_position.x = self.list_node_detail[i].position.x+self.current_padding_horizontal
+      _new_position.y = self.list_node_detail[i].position.y+self.current_padding_vertical
 
   def set_position(self, position: pygame.math.Vector2) -> None:
     self.position = position.copy()
