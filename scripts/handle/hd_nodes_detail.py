@@ -16,12 +16,14 @@ class NodesDetailHandle:
     self.position = pygame.math.Vector2(0,0)
 
     self.default_padding_horizontal = 350
+    self.default_padding_betwwen = 50
     self.default_padding_vertical = 0
     self.default_size_border_arrow = 2
     self.default_length_arrow = 0
     self.default_width_arrow = 6
 
     self.current_padding_horizontal = float(self.default_padding_horizontal)
+    self.current_padding_betwwen = float(self.default_padding_betwwen)
     self.current_padding_vertical = float(self.default_padding_vertical)
     self.current_size_border_arrow= int(self.default_size_border_arrow)
     self.current_length_arrow = int(self.default_length_arrow)
@@ -48,10 +50,12 @@ class NodesDetailHandle:
     self._draw_arrow_node_detail(surface)
 
   def update_all(self, delta_time: float) -> None:
-    pass
+    for i in range(self.node_detail_cout):
+      self.list_node_detail[i].update(delta_time)
 
   def events_all(self, event: pygame.event.Event) -> None:
-    pass
+    for i in range(self.node_detail_cout):
+      self.list_node_detail[i].events(event)
 
   def add_node_detail(self) -> None:
     pass
@@ -77,8 +81,13 @@ class NodesDetailHandle:
   def set_scale_ratio(self, scale_ratio: float) -> None:
     self.scale_ratio = float(scale_ratio)
     self.current_padding_horizontal = float(self.default_padding_horizontal*self.scale_ratio)
+    self.current_padding_betwwen = float(self.default_padding_betwwen*self.scale_ratio)
     self.current_padding_vertical = float(self.default_padding_vertical*self.scale_ratio)
     self.current_size_border_arrow = int(self.default_size_border_arrow*self.scale_ratio) if int(self.default_size_border_arrow*self.scale_ratio) > 0 else 1
     self.current_length_arrow = int(self.default_length_arrow*self.scale_ratio)
     self.current_width_arrow = int(self.default_width_arrow*self.scale_ratio)
     self._reset_all_scale_ratio()
+
+  def reset_image(self):
+    for i in range(1, self.node_detail_cout):
+      self.list_node_detail[i].set_image(self.list_node_detail[i-1].image_apply)

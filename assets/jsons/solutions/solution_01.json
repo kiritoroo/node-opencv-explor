@@ -9,6 +9,8 @@
     "category": "filtering",
     "type": "gaussian",
     "name": "Gaussian",
-    "params": {}
+    "params": {
+      "ksize": 50
+    }
   }
 }

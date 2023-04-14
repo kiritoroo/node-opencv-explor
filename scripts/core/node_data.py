@@ -35,3 +35,5 @@ class NodeData:
     else:
       self.node_detail = None
       self.node = None
+
+    self.node_detail.set_params(*self.params)

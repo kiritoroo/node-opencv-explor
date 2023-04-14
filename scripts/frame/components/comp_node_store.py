@@ -2,9 +2,9 @@ import pygame
 import pygame_gui
 import assets.assets as ats
 import scripts.constants as cts
-import scripts.colors as cls
 from scripts.frame.components.comp_nodes_base import ComponentNodesBase
-from scripts.frame.components.comp_nodes_filterring import ComponentNodesFilteringe
+from scripts.frame.components.comp_nodes_filterring import ComponentNodesFiltering
+from scripts.frame.components.comp_nodes_morphology import ComponentNodesMorphology
 
 class ComponentNodeStore:
   def __init__(self, solution) -> None:
@@ -25,8 +25,13 @@ class ComponentNodeStore:
     self.ui_manager = pygame_gui.UIManager((cts.SCREEN_WIDTH, cts.SCREEN_HEIGHT), ats.THEME_PATH)
 
     self.comp_nodes_base = ComponentNodesBase(self.ui_manager)
-    self.comp_nodes_filtering = ComponentNodesFilteringe(self.ui_manager)
-    self.comp_nodes_list = [self.comp_nodes_base, self.comp_nodes_filtering]
+    self.comp_nodes_filtering = ComponentNodesFiltering(self.ui_manager)
+    self.comp_nodes_morphology = ComponentNodesMorphology(self.ui_manager)
+
+    self.comp_nodes_list = [
+      self.comp_nodes_base,
+      self.comp_nodes_filtering,
+      self.comp_nodes_morphology]
     self.selected_category_index = 0
     self.selected_comp_node = self.comp_nodes_list[self.selected_category_index]
 
@@ -94,7 +99,6 @@ class ComponentNodeStore:
       for i, _btn_node in enumerate(self.selected_comp_node.ui_btn_node_list):
         if event.ui_element == _btn_node:
           self.add_node_handle(self.selected_comp_node.nodes_info_list[i])
-          self.hide()
           return
 
   def _select_category_handle(self):
@@ -127,4 +131,6 @@ class ComponentNodeStore:
     for _, _param_value in node_info_dict["params"].items():
       _node_params.append(_param_value)
 
-    self.solution.add_node_data(_node_category, _node_type, _node_name, _node_params)
+    if _node_type != "original":
+      self.solution.add_node_data(_node_category, _node_type, _node_name, _node_params)
+      self.hide()

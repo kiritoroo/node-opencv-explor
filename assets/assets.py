@@ -1,5 +1,5 @@
 IMAGE_FOLDER_PATH='./assets/images'
-IMAGE_DEFAULT_PATH= f'{IMAGE_FOLDER_PATH}/image_default.jpg'
+IMAGE_DEFAULT_PATH= f'{IMAGE_FOLDER_PATH}/image_default2.jpg'
 
 FONT_FOLDER_PATH='./assets/fonts'
 FONT_POPPINS_LIGHT_PATH=f'{FONT_FOLDER_PATH}/poppins_light.ttf'
@@ -18,3 +18,4 @@ SOLUTION_DEFAULT_PATH=f'{SOLUTION_FOLDER_PATH}/solution_default.json'
 
 NODES_BASE_INFO_PATH=f'{JSON_FOLDER_PATH}/nodes_base_info.json'
 NODES_FILTERING_INFO_PATH=f'{JSON_FOLDER_PATH}/nodes_filtering_info.json'
+NODES_MORPHOLOGY_INFO_PATH=f'{JSON_FOLDER_PATH}/nodes_morphology_info.json'

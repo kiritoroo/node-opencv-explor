@@ -33,6 +33,7 @@ class Solution():
   def __config_variables(self):
     self.scale_ratio = sts.scale_ratio
     self.add_node_index = 0
+    self.remove_node_index = 0
 
     self.position_nodes = pygame.math.Vector2(1600, 100)
     self.position_nodes_detail = pygame.math.Vector2(0, 0)
@@ -89,30 +90,30 @@ class Solution():
     self.surf_text_label_node_detail=self.font.render(self.solution_name, True, cls.SOLUTION_LABEL_TEXT_COLOR)
     self.rect_text_label_node_detail=self.surf_text_label_node_detail.get_rect(center=(self.rect_label_node_detail.center))
 
-  def __config_rects_add_area_bounding_box(self):
-    self.list_rect_area_bouding_box= [pygame.Rect(0,0,0,0) for _ in range(self.handle_nodes_detail.node_detail_cout)]
-    _padding_horizontal = self.handle_nodes_detail.list_node_detail[1].rect_container.left-self.handle_nodes_detail.list_node_detail[0].rect_container.right
+  def __config_rects_add_area_bounding_box(self):    
+    self.list_rect_area_bounding_box= [pygame.Rect(0,0,0,0) for _ in range(self.handle_nodes_detail.node_detail_cout)]
+    _padding_horizontal = self.handle_nodes_detail.current_padding_betwwen
     _padding_vertical = self.handle_nodes_detail.list_node_detail[0].rect_container.height/2
-    _bounding_box_width = self.handle_nodes_detail.list_node_detail[1].rect_container.left-self.handle_nodes_detail.list_node_detail[0].rect_container.right+_padding_horizontal
+    _bounding_box_width = _padding_horizontal*2
     _bounding_box_height = self.handle_nodes_detail.list_node_detail[0].rect_container.height/2+_padding_vertical
     for i in range(self.handle_nodes_detail.node_detail_cout):
-      self.list_rect_area_bouding_box[i].left = self.handle_nodes_detail.list_node_detail[i].rect_container.right-_padding_horizontal/2
-      self.list_rect_area_bouding_box[i].top = self.handle_nodes_detail.list_node_detail[i].rect_container.top+self.handle_nodes_detail.list_node_detail[i].rect_container.height/4-_padding_vertical/2
-      self.list_rect_area_bouding_box[i].width = _bounding_box_width
-      self.list_rect_area_bouding_box[i].height = _bounding_box_height
+      self.list_rect_area_bounding_box[i].left = self.handle_nodes_detail.list_node_detail[i].rect_container.right-_padding_horizontal/2
+      self.list_rect_area_bounding_box[i].top = self.handle_nodes_detail.list_node_detail[i].rect_container.top+self.handle_nodes_detail.list_node_detail[i].rect_container.height/4-_padding_vertical/2
+      self.list_rect_area_bounding_box[i].width = _bounding_box_width
+      self.list_rect_area_bounding_box[i].height = _bounding_box_height
 
   def __config_ui_btn_add_list(self):
     for i in range(len(self.ui_btn_add_list)):
-      _pos_x = self.list_rect_area_bouding_box[i].centerx-self.current_size_btn_add.width/2
-      _pos_y = self.list_rect_area_bouding_box[i].centery-self.current_size_btn_add.height*2
+      _pos_x = self.list_rect_area_bounding_box[i].centerx-self.current_size_btn_add.width/2
+      _pos_y = self.list_rect_area_bounding_box[i].centery-self.current_size_btn_add.height*2
       if i == len(self.ui_btn_add_list)-1:
-        _pos_x = self.list_rect_area_bouding_box[i].centerx
-        _pos_y = self.list_rect_area_bouding_box[i].centery-self.current_size_btn_add.height/2
+        _pos_x = self.list_rect_area_bounding_box[i].centerx
+        _pos_y = self.list_rect_area_bounding_box[i].centery-self.current_size_btn_add.height/2
       self.ui_btn_add_list[i].set_position(pygame.math.Vector2(_pos_x, _pos_y,))
 
   def _draw_add_area_bouding_box(self, surface):
     for i in range(self.handle_nodes_detail.node_detail_cout-1):
-      uts.draw_rect_rounded(surface, self.list_rect_area_bouding_box[i], cls.RED, 0)
+      uts.draw_rect_rounded(surface, self.list_rect_area_bounding_box[i], cls.RED, 0)
 
   def _start(self):
     self.read_solution(self.solution_path)
@@ -123,6 +124,7 @@ class Solution():
     self.__config_rects_add_area_bounding_box()
     self.__config_ui_elements()
     self.__config_ui_btn_add_list()
+    self.handle_nodes_detail.reset_image()
 
   def draw(self, surface: pygame.Surface) -> None:
     uts.draw_rect_rounded(surface, self.rect_container_node_detail, self.color_bg, self.current_size_rounded_container)
@@ -130,12 +132,16 @@ class Solution():
     uts.draw_rect_rounded(surface, self.rect_label_node_detail, self.color_bg_label_node_detail, self.current_size_rounded_label)
     surface.blit(self.surf_text_label_node_detail, self.rect_text_label_node_detail)
     self.ui_manager.draw_ui(surface)
-
+    
   def update(self, delta_time: float) -> None:
     self.ui_manager.update(delta_time)
     self.comp_node_store.update(delta_time)
+
+    self.handle_nodes.update_all(delta_time)
+    self.handle_nodes_detail.update_all(delta_time)
+  
     _mouse_pos = pygame.mouse.get_pos()
-    for i, rect in enumerate(self.list_rect_area_bouding_box):
+    for i, rect in enumerate(self.list_rect_area_bounding_box):
       if rect.collidepoint(_mouse_pos):
         self.ui_btn_add_list[i].visible = True
       else:
@@ -145,11 +151,20 @@ class Solution():
     self.ui_manager.process_events(event)
     self.comp_node_store.events(event)
 
+    self.handle_nodes.events_all(event)
+    self.handle_nodes_detail.events_all(event)
+
     if event.type == pygame_gui.UI_BUTTON_PRESSED:
       for i in range(len(self.ui_btn_add_list)):
         if event.ui_element == self.ui_btn_add_list[i]:
           self.add_node_index = i+1
           self.comp_node_store.show()
+          return
+        
+      for i in range(self.handle_nodes_detail.node_detail_cout):
+        if event.ui_element == self.handle_nodes_detail.list_node_detail[i].node.ui_btn_remove:
+          self.remove_node_index = i
+          self.remove_node_data()
           return
 
   def read_solution(self, solution_path) -> None:
@@ -204,9 +219,26 @@ class Solution():
     self.__config_text_label_node_detail()
     self.__config_rects_add_area_bounding_box()
     self.__config_ui_btn_add_list()
+    self.handle_nodes_detail.reset_image()
 
-  def remove_node_data(self) -> None:
-    pass
+  def remove_node_data(self):
+    if self.node_data_count < 2:
+      return
+    self.nodes_data.remove(self.remove_node_index)
+    self.node_data_count -= 1
+    _list_node = self._get_nodes()
+    _list_node_detail = self._get_nodes_detail() 
+    self.handle_nodes = NodesHandle(_list_node)
+    self.handle_nodes_detail = NodesDetailHandle(_list_node_detail)
+    self.__config_ui_elements()
+    self._reset_scale_ratio()
+    self._reset_position()
+    self.__config_rect_container_node_detail()
+    self.__config_rect_label_node_detail()
+    self.__config_text_label_node_detail()
+    self.__config_rects_add_area_bounding_box()
+    self.__config_ui_btn_add_list()
+    self.handle_nodes_detail.reset_image()
 
   def _reset_position(self) -> None:
     self.handle_nodes.set_position(self.position_nodes.copy())
@@ -231,7 +263,7 @@ class Solution():
     self.current_size_label_node_detail.height = self.default_size_label_node_detail.height*self.scale_ratio
     self.current_size_rounded_container = int(self.default_size_rounded_container*self.scale_ratio)
     self.current_size_rounded_label = int(self.default_size_rounded_label*self.scale_ratio)
-    self.current_padding_container_horizontal= float(self.default_padding_container_horizontal)
+    self.current_padding_container_horizontal= float(self.default_padding_container_horizontal*self.scale_ratio)
     self.current_padding_container_vertical= float(self.default_padding_container_vertical*self.scale_ratio)
     self.font = pygame.font.Font(ats.FONT_POPPINS_MEDIUM_PATH, self.current_size_text)
     self._reset_scale_ratio()

@@ -9,12 +9,16 @@
     "category": "filtering",
     "type": "gaussian",
     "name": "Gaussian",
-    "params": {}
+    "params": {
+      "ksize": 10
+    }
   },
   "3": {
     "category": "morphology",
     "type": "close",
     "name": "Close",
-    "params": {}
+    "params": {
+      "ksize": 5
+    }
   }
 }

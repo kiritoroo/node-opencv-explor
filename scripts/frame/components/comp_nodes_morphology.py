@@ -4,17 +4,17 @@ import json
 import assets.assets as ats
 import scripts.constants as cts
 
-class ComponentNodesFiltering:
+class ComponentNodesMorphology:
   def __init__(self, ui_manager: pygame_gui.UIManager) -> None:
     self.ui_manager = ui_manager
     self._start()
 
   def __config_variables(self) -> None:
-    self.nodes_filtering_info_path = ats.NODES_FILTERING_INFO_PATH
+    self.nodes_morphology_info_path = ats.NODES_MORPHOLOGY_INFO_PATH
     self.size_btn_node = pygame.Rect(0, 0, 180, 40)
 
-    with open(self.nodes_filtering_info_path, 'r', encoding='utf-8') as _file:
-      self.nodes_filtering_info_dict: dict = json.load(_file)
+    with open(self.nodes_morphology_info_path, 'r', encoding='utf-8') as _file:
+      self.nodes_morphology_info_dict: dict = json.load(_file)
 
       self.nodes_info_list = [
         {"category": v["category"],
@@ -22,7 +22,7 @@ class ComponentNodesFiltering:
         "name": v["name"],
         "tooltip": v["tooltip"],
         "params": v["params"]}
-        for v in self.nodes_filtering_info_dict.values()]
+        for v in self.nodes_morphology_info_dict.values()]
       
       self.nodes_info_count = len(self.nodes_info_list)
 
@@ -40,7 +40,7 @@ class ComponentNodesFiltering:
       _ui_btn_node_base = pygame_gui.elements.UIButton(relative_rect=_rect,
               text=f'{self.nodes_info_list[i].get("name")}', tool_tip_text=f'{self.nodes_info_list[i].get("tooltip")}',
               manager=self.ui_manager, container=self.ui_panel_container,
-              object_id=pygame_gui.core.ObjectID(object_id="@btn_node_filtering", class_id="#btn"))
+              object_id=pygame_gui.core.ObjectID(object_id="@btn_node_morphology", class_id="#btn"))
       self.ui_btn_node_list.append(_ui_btn_node_base)
 
   def __config_ui_btn_node_base_list(self):

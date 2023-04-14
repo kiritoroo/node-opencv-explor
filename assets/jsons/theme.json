@@ -49,7 +49,9 @@
   "@btn_add_node": {
     "colours":
     {
-      "active_bg": "#EFE0E7"
+      "normal_bg": "#D9FDD7,#B4EFAF,20",
+      "hovered_bg": "#D9FDD7",
+      "active_bg": "#B4EFAF"
     }
   },
   "@btn_close_panel": {
@@ -80,6 +82,35 @@
       "normal_bg": "#E1E7FF,#EFE0E7,20",
       "hovered_bg": "#E1E7FF",
       "active_bg": "#EFE0E7"
+    }
+  },
+  "@btn_node_morphology": {
+    "colours":
+    {
+      "normal_bg": "#F6F1B7,#FCDF93,20",
+      "hovered_bg": "#F6F1B7",
+      "active_bg": "#FCDF93"
+    }
+  },
+  "@btn_config": {
+    "colours":
+    {
+      "normal_bg": "#E1E7FF,#DDD4EE,20",
+      "hovered_bg": "#E1E7FF",
+      "active_bg": "#DDD4EE"
+    },
+    "font":
+    {
+      "name": "poppins",
+      "size": "12"
+    }
+  },
+  "@btn_remove": {
+    "colours":
+    {
+      "normal_bg": "#FFB4B9,#F69BA4,20",
+      "hovered_bg": "#FFB4B9",
+      "active_bg": "#F69BA4"
     }
   },
   "#txt": {
@@ -115,7 +146,7 @@
   {
     "misc":
     {
-      "rect_width": "250"
+      "rect_width": "300"
     }
   },
   "tool_tip.text_box": {

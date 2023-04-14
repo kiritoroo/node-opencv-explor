@@ -7,3 +7,6 @@ class BSOriginal(NodeDetail):
     self.node_name = "Original"
     self.color_bg = color_bg
     super().__init__(self.node_name, self.color_bg, image)
+
+  def set_params(self):
+    pass

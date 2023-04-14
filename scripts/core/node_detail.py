@@ -23,6 +23,7 @@ class NodeDetail():
     self.position = pygame.math.Vector2(0, 0)
     self.default_image_width = 250
     self.image_width = int(self.default_image_width)
+    self.is_show_ui = False
 
     self.default_size_border = 1
     self.default_padding_container_image_horizontal = 50
@@ -67,6 +68,13 @@ class NodeDetail():
     _height = self.rect_image_container.height + self.node.rect_container.height/2
     self.rect_container = pygame.Rect(_left, _top, _width, _height)
 
+  def __config_rect_area_bounding_box(self):
+    _left = self.rect_image_container.left
+    _top = self.node.rect_container.top-50/2
+    _width = self.rect_image_container.width
+    _height = self.rect_image_container.height + self.node.rect_container.height/2 + 50
+    self.rect_area_bounding_box = pygame.Rect(_left, _top, _width, _height)
+
   def _start(self):
     self.__config_variables()
     self.__config_surf_image()
@@ -74,6 +82,7 @@ class NodeDetail():
     self.__config_rect_container_image()
     self.__config_node()
     self.__config_rect_container()
+    self.__config_rect_area_bounding_box()
 
   def draw(self, surface: pygame.Surface) -> None:
     uts.draw_rect_bordered_rounded(surface, self.rect_image_container, self.color_bg_image, self.color_border, 0, self.current_size_border)
@@ -81,10 +90,18 @@ class NodeDetail():
     self.node.draw(surface)
 
   def update(self, delta_time: float) -> None:
-    pass
+    self.node.update(delta_time)
+
+    _mouse_pos = pygame.mouse.get_pos()
+    if self.rect_area_bounding_box.collidepoint(_mouse_pos):
+      self.is_show_ui = True
+      self.node.show_ui()
+    else:
+      self.is_show_ui = False
+      self.node.hide_ui()
 
   def events(self, event: pygame.event.Event) -> None:
-    pass
+    self.node.events(event)
 
   def set_position(self, position: pygame.math.Vector2) -> None:
     self.position = position.copy()
@@ -92,6 +109,7 @@ class NodeDetail():
     self.__config_rect_container_image()
     self.__config_node()
     self.__config_rect_container()
+    self.__config_rect_area_bounding_box()
 
   def set_scale_ratio(self, scale_ratio: float) -> None:
     self.scale_ratio = float(scale_ratio)
@@ -103,3 +121,11 @@ class NodeDetail():
     self.__config_rect_container_image()
     self.__config_node()
     self.__config_rect_container()
+    self.__config_rect_area_bounding_box()
+
+  def set_image(self, image_cv: np.matrix) -> None:
+    self.__config_surf_image()
+    self.__config_rect_image()
+
+  def set_params(self, *args, **kwargs):
+    pass

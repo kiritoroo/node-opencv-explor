@@ -18,11 +18,13 @@ class NodesHandle:
       self.list_node[i].draw(surface)
 
   def update_all(self, delta_time: float) -> None:
-    pass
+    for i in range(self.node_count):
+      self.list_node[i].update(delta_time)
 
   def events_all(self, event: pygame.event.Event) -> None:
-    pass
-
+    for i in range(self.node_count):
+      self.list_node[i].events(event)
+      
   def add_node(self) -> None:
     pass
 
