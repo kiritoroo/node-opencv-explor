@@ -51,7 +51,7 @@ class SolutionsHandle:
         _solution = Solution(_solution_name, _solution_path)
         self.solutions.append(_solution)
 
-  def write_solutions(self) -> None:
+  def save_solutions(self) -> None:
     pass
 
   def create_solution(self) -> None:

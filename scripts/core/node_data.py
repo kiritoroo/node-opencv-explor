@@ -14,9 +14,9 @@ class NodeData:
     self.node: Node = None
     self.node_detail: NodeDetail = None
 
-    self.start()
+    self._start()
 
-  def start(self) -> None:
+  def _start(self) -> None:
     _default_image_cv = sts.load_image_cv_default()
 
     _factory_base = FactoryBase()
@@ -37,3 +37,18 @@ class NodeData:
       self.node = None
 
     self.node_detail.set_params(*self.params)
+
+  def export_data_dict(self) -> dict:
+    _category = self.node_category
+    _node_type = self.node_type
+    _node_name = self.node_name
+    _node_params = self.node_detail.param_dict
+
+    _data_dict = {
+      "category": _category,
+      "type": _node_type,
+      "name": _node_name,
+      "params": _node_params
+    }
+
+    return _data_dict

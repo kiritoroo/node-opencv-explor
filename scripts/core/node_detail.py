@@ -1,16 +1,20 @@
+from abc import abstractmethod
 import pygame
+import pygame_gui
 import numpy as np
+import assets.assets as ats
 import scripts.utils as uts
+import scripts.constants as cts
 import scripts.colors as cls
 import scripts.stores as sts
 from scripts.core.node import Node
 
 class NodeDetail():
   def __init__(self, node_name: str, color_node: pygame.Color, image: np.matrix) -> None:
-    super().__init__()
     self.node_name = node_name
     self.color_node = color_node
     self.node: Node = Node(self.node_name, self.color_node)
+    self.param_dict = {}
 
     self.image_raw = image.copy()
     self.image_apply = image.copy()
@@ -24,6 +28,7 @@ class NodeDetail():
     self.default_image_width = 250
     self.image_width = int(self.default_image_width)
     self.is_show_ui = False
+    self.is_update_image = False
 
     self.default_size_border = 1
     self.default_padding_container_image_horizontal = 50
@@ -36,6 +41,21 @@ class NodeDetail():
     self.color_node = self.color_node
     self.color_bg_image = cls.NODE_DETAIL_BG_COLOR
     self.color_border = cls.NODE_DETAIL_BORDER_COLOR
+
+  def __config_ui_elements(self) -> None:
+    self.ui_manager = pygame_gui.UIManager((cts.SCREEN_WIDTH, cts.SCREEN_HEIGHT), ats.THEME_PATH)
+
+    _rect = pygame.Rect(0, 0, self.size_panel_config.width, self.size_panel_config.height)
+    _rect.center = self.rect_container.center
+    self.ui_panel_config = pygame_gui.elements.UIPanel(relative_rect=_rect,
+              manager=self.ui_manager,
+              object_id=pygame_gui.core.ObjectID(class_id="#panel"))
+    self.ui_panel_config.visible = False
+  
+  def __config_ui_panel_config(self):
+    _pos_x = self.rect_container.centerx-self.size_panel_config.width/2
+    _pos_y = self.rect_image_container.centery-self.size_panel_config.height/3
+    self.ui_panel_config.set_position(pygame.math.Vector2(_pos_x, _pos_y))
 
   def __config_surf_image(self):
     self.surf_image_default = pygame.surfarray.make_surface(self.image_display).convert_alpha()
@@ -83,14 +103,18 @@ class NodeDetail():
     self.__config_node()
     self.__config_rect_container()
     self.__config_rect_area_bounding_box()
+    self.__config_ui_elements()
+    self.__config_ui_panel_config()
 
   def draw(self, surface: pygame.Surface) -> None:
     uts.draw_rect_bordered_rounded(surface, self.rect_image_container, self.color_bg_image, self.color_border, 0, self.current_size_border)
     surface.blit(self.surf_image, self.rect_image)
     self.node.draw(surface)
+    self.ui_manager.draw_ui(surface)
 
   def update(self, delta_time: float) -> None:
     self.node.update(delta_time)
+    self.ui_manager.update(delta_time)
 
     _mouse_pos = pygame.mouse.get_pos()
     if self.rect_area_bounding_box.collidepoint(_mouse_pos):
@@ -99,9 +123,17 @@ class NodeDetail():
     else:
       self.is_show_ui = False
       self.node.hide_ui()
+      if self.ui_panel_config.visible:
+        self.ui_panel_config.visible = False
 
   def events(self, event: pygame.event.Event) -> None:
+    self.ui_manager.process_events(event)
     self.node.events(event)
+
+    if event.type == pygame_gui.UI_BUTTON_PRESSED:
+      if event.ui_element == self.node.ui_btn_config:
+        self.ui_panel_config.visible = True
+        return
 
   def set_position(self, position: pygame.math.Vector2) -> None:
     self.position = position.copy()
@@ -110,6 +142,7 @@ class NodeDetail():
     self.__config_node()
     self.__config_rect_container()
     self.__config_rect_area_bounding_box()
+    self.__config_ui_panel_config()
 
   def set_scale_ratio(self, scale_ratio: float) -> None:
     self.scale_ratio = float(scale_ratio)
@@ -122,6 +155,7 @@ class NodeDetail():
     self.__config_node()
     self.__config_rect_container()
     self.__config_rect_area_bounding_box()
+    self.__config_ui_panel_config()
 
   def set_image(self, image_cv: np.matrix) -> None:
     self.__config_surf_image()

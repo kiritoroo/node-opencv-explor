@@ -45,13 +45,19 @@ class NodesDetailHandle:
     self.__config_variables()
 
   def draw_all(self, surface: pygame.Surface) -> None:
+    self._draw_arrow_node_detail(surface)
     for i in range(self.node_detail_cout):
       self.list_node_detail[i].draw(surface)
-    self._draw_arrow_node_detail(surface)
 
   def update_all(self, delta_time: float) -> None:
     for i in range(self.node_detail_cout):
       self.list_node_detail[i].update(delta_time)
+
+    for i in range(self.node_detail_cout):
+      if self.list_node_detail[i].is_update_image:
+        self.reset_image()
+        self.list_node_detail[i].is_update_image = False
+        return
 
   def events_all(self, event: pygame.event.Event) -> None:
     for i in range(self.node_detail_cout):

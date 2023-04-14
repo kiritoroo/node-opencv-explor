@@ -19,7 +19,7 @@ class Frame:
 
     _rect = pygame.Rect(0, 0, 50, 22)
     _rect.topright = (-80, 20)
-    self.ui_txt_zoom_percent = pygame_gui.elements.ui_label.UILabel(relative_rect=_rect,
+    self.ui_txt_zoom_percent = pygame_gui.elements.UILabel(relative_rect=_rect,
               text=f'{int(self.scale_ratio*100)}%', manager=self.ui_manager,
               object_id=pygame_gui.core.ObjectID(class_id="#txt"),
               anchors={'top': 'top',

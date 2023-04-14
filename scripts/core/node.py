@@ -8,7 +8,6 @@ import scripts.stores as sts
 
 class Node():
   def __init__(self, node_name, color_node) -> None:
-    super().__init__()
     self.node_name = node_name
     self.color_node = color_node
 

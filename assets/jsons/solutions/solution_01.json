@@ -1,8 +1,14 @@
 {
-  "1": {
+  "0": {
     "category": "base",
     "type": "original",
     "name": "Original",
+    "params": {}
+  },
+  "1": {
+    "category": "base",
+    "type": "grayscale",
+    "name": "Grayscale",
     "params": {}
   },
   "2": {
@@ -10,7 +16,15 @@
     "type": "gaussian",
     "name": "Gaussian",
     "params": {
-      "ksize": 50
+      "ksize": 23
+    }
+  },
+  "3": {
+    "category": "filtering",
+    "type": "gaussian",
+    "name": "Gaussian",
+    "params": {
+      "ksize": 73
     }
   }
 }

@@ -72,6 +72,16 @@ class Solution():
       _ui_btn_add.visible = False
       self.ui_btn_add_list.append(_ui_btn_add)
 
+    _rect = pygame.Rect(0, 0, 45, 30)
+    self.ui_btn_save = pygame_gui.elements.UIButton(relative_rect=_rect,
+              text='save', manager=self.ui_manager,
+              object_id=pygame_gui.core.ObjectID(object_id="@btn_save", class_id="#btn"))
+
+    _rect = pygame.Rect(0, 0, 45, 30)
+    self.ui_btn_delete = pygame_gui.elements.UIButton(relative_rect=_rect,
+              text='del', manager=self.ui_manager,
+              object_id=pygame_gui.core.ObjectID(object_id="@btn_delete", class_id="#btn"))
+
   def __config_rect_container_node_detail(self):
     _left = self.handle_nodes_detail.list_node_detail[0].rect_container.left-self.current_padding_container_horizontal/2
     _top = self.handle_nodes_detail.list_node_detail[0].rect_container.top-self.current_padding_container_vertical/1.5
@@ -111,6 +121,16 @@ class Solution():
         _pos_y = self.list_rect_area_bounding_box[i].centery-self.current_size_btn_add.height/2
       self.ui_btn_add_list[i].set_position(pygame.math.Vector2(_pos_x, _pos_y,))
 
+  def __config_ui_btn_save(self):
+    _pos_x = self.rect_container_node_detail.left-15
+    _pos_y = self.rect_container_node_detail.centery-self.rect_container_node_detail.height/4
+    self.ui_btn_save.set_position(pygame.math.Vector2(_pos_x, _pos_y))
+
+  def __config_ui_btn_delete(self):
+    _pos_x = self.rect_container_node_detail.left-15
+    _pos_y = self.rect_container_node_detail.centery
+    self.ui_btn_delete.set_position(pygame.math.Vector2(_pos_x, _pos_y))
+
   def _draw_add_area_bouding_box(self, surface):
     for i in range(self.handle_nodes_detail.node_detail_cout-1):
       uts.draw_rect_rounded(surface, self.list_rect_area_bounding_box[i], cls.RED, 0)
@@ -124,6 +144,8 @@ class Solution():
     self.__config_rects_add_area_bounding_box()
     self.__config_ui_elements()
     self.__config_ui_btn_add_list()
+    self.__config_ui_btn_save()
+    self.__config_ui_btn_delete()
     self.handle_nodes_detail.reset_image()
 
   def draw(self, surface: pygame.Surface) -> None:
@@ -166,6 +188,9 @@ class Solution():
           self.remove_node_index = i
           self.remove_node_data()
           return
+      
+      if event.ui_element == self.ui_btn_save:
+        self.save_solution_json()
 
   def read_solution(self, solution_path) -> None:
     self.solution_path = solution_path
@@ -219,6 +244,8 @@ class Solution():
     self.__config_text_label_node_detail()
     self.__config_rects_add_area_bounding_box()
     self.__config_ui_btn_add_list()
+    self.__config_ui_btn_save()
+    self.__config_ui_btn_delete()
     self.handle_nodes_detail.reset_image()
 
   def remove_node_data(self):
@@ -238,6 +265,8 @@ class Solution():
     self.__config_text_label_node_detail()
     self.__config_rects_add_area_bounding_box()
     self.__config_ui_btn_add_list()
+    self.__config_ui_btn_save()
+    self.__config_ui_btn_delete()
     self.handle_nodes_detail.reset_image()
 
   def _reset_position(self) -> None:
@@ -255,6 +284,8 @@ class Solution():
     self.__config_text_label_node_detail()
     self.__config_rects_add_area_bounding_box()
     self.__config_ui_btn_add_list()
+    self.__config_ui_btn_save()
+    self.__config_ui_btn_delete()
 
   def set_scale_ratio(self, scale_ratio: float) -> None:
     self.scale_ratio = float(scale_ratio)
@@ -273,3 +304,26 @@ class Solution():
     self.__config_text_label_node_detail()
     self.__config_rects_add_area_bounding_box()
     self.__config_ui_btn_add_list()
+    self.__config_ui_btn_save()
+    self.__config_ui_btn_delete()
+
+  def export_data_dict(self) -> dict:
+    _data_dict = {}
+    for i in range(self.node_data_count):
+      _data_dict[f'{i}'] = self.nodes_data.get(i).export_data_dict()
+    return _data_dict
+  
+  def save_solution_json(self) -> None:
+    with open(self.solution_path, 'w') as json_file:
+      json.dump(self.export_data_dict(), json_file, indent=2)
+
+    _dialog_msg = f'''
+      Solution: {self.solution_name}
+      Total Node: {self.node_data_count}
+    '''
+    _rect = pygame.Rect(0, 0, 300, 200)
+    _rect.center = pygame.math.Vector2(cts.SCREEN_WIDTH//2, cts.SCREEN_HEIGHT//2)
+    pygame_gui.windows.UIConfirmationDialog(rect = _rect,
+        action_long_desc = _dialog_msg,
+        window_title ='Save successfully',
+        manager = self.ui_manager)
