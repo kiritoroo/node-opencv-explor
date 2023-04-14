@@ -10,16 +10,19 @@ class MPDiale(NodeDetail):
     self.color_bg = color_bg
     self.size_panel_config = pygame.Rect(0, 0, 250, 100)
     self.ksize = (5,5)
+    self.param_dict = {
+      "ksize": self.ksize[0]
+    }
     self.kernel = np.ones(self.ksize, np.uint8)
     super().__init__(self.node_name, self.color_bg, image)
     self.__config_ui_elements()
 
   def __config_ui_elements(self):
-    _rect = pygame.Rect(0, 0, 50, 20)
-    self.ui_txt_ksize= pygame_gui.elements.UILabel(relative_rect=_rect,
-              text=f'ksize: {self.ksize[0]}', 
+    _rect = pygame.Rect(0, 0, 60, 20)
+    self.ui_txt_ksize= pygame_gui.elements.UIButton(relative_rect=_rect,
+              text=f'ksize: {self.ksize[0]}', tool_tip_text="Kích thước của kernel (bộ lọc).",
               manager=self.ui_manager, container=self.ui_panel_config,
-              object_id=pygame_gui.core.ObjectID(class_id="#txt"))
+              object_id=pygame_gui.core.ObjectID(object_id="@btn_param",class_id="#btn"))
     
     _rect = pygame.Rect(0, 0, 150, 20)
     self.ui_slider_ksize = pygame_gui.elements.UIHorizontalSlider(relative_rect=_rect,
@@ -60,6 +63,7 @@ class MPDiale(NodeDetail):
     if ksize % 2 == 0:
       ksize += 1
     self.ksize = (int(ksize), int(ksize))
+    self.param_dict["ksize"] = self.ksize[0]
     self.kernel = np.ones(self.ksize, np.uint8)
     self.ui_slider_ksize.set_current_value(self.ksize[0])
     self.ui_txt_ksize.set_text(f'ksize: {self.ksize[0]}')

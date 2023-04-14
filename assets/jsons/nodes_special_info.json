@@ -1,0 +1,20 @@
+{
+  "1": {
+    "category": "special",
+    "type": "canny",
+    "name": "Canny",
+    "tooltip": "Canny Node phát hiện biên cạnh trong ảnh bằng thuật toán Canny.",
+    "params": {
+      "tlower": 100,
+      "tupper": 200,
+      "aperture": 3
+    }
+  },
+  "2": {
+    "category": "special",
+    "type": "contours",
+    "name": "Contours",
+    "tooltip": "Contours Node tìm đường viền (đường biên) của các vùng được phân đoạn trong ảnh, kết quả là một danh sách các đường viền.",
+    "params": {}
+  }
+}

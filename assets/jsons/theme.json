@@ -79,9 +79,9 @@
   "@btn_node_filtering": {
     "colours":
     {
-      "normal_bg": "#E1E7FF,#EFE0E7,20",
-      "hovered_bg": "#E1E7FF",
-      "active_bg": "#EFE0E7"
+      "normal_bg": "#D9FED5,#B3EEAE,20",
+      "hovered_bg": "#D9FED5",
+      "active_bg": "#B3EEAE"
     }
   },
   "@btn_node_morphology": {
@@ -90,6 +90,14 @@
       "normal_bg": "#F6F1B7,#FCDF93,20",
       "hovered_bg": "#F6F1B7",
       "active_bg": "#FCDF93"
+    }
+  },
+  "@btn_node_special": {
+    "colours":
+    {
+      "normal_bg": "#DDCAFF,#C2A9FC,20",
+      "hovered_bg": "#DDCAFF",
+      "active_bg": "#C2A9FC"
     }
   },
   "@btn_config": {
@@ -132,6 +140,21 @@
       "normal_bg": "#CEDEF7,#EFE0E7,20",
       "hovered_bg": "#CEDEF7",
       "active_bg": "#EEF4FC,#F9F4F7,90"
+    },
+    "font":
+    {
+      "name": "poppins",
+      "size": "12"
+    }
+  },
+    "@btn_param": {
+    "colours":
+    {
+      "normal_bg": "#CEDEF7,#EFE0E7,20",
+      "hovered_bg": "#CEDEF7",
+      "normal_text": "#5A606C",
+      "hovered_text": "#5A606C",
+      "active_bg": "#CEDEF7,#EFE0E7,20"
     },
     "font":
     {
@@ -235,12 +258,12 @@
       "hovered_bg": "#CEDEF7",
       "normal_text": "#5A606C",
       "hovered_text": "#5A606C",
-      "active_bg": "#EFE0E7",
+      "active_bg": "#8AB1EC",
       "normal_border": "#CEDEF7"
     },
     "misc":
     {
-      "border_width": "1",
+      "border_width": "0",
       "shadow_width": "0"
     }
   },

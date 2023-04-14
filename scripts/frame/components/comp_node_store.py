@@ -5,6 +5,7 @@ import scripts.constants as cts
 from scripts.frame.components.comp_nodes_base import ComponentNodesBase
 from scripts.frame.components.comp_nodes_filterring import ComponentNodesFiltering
 from scripts.frame.components.comp_nodes_morphology import ComponentNodesMorphology
+from scripts.frame.components.comp_nodes_special import ComponentNodesSpecial
 
 class ComponentNodeStore:
   def __init__(self, solution) -> None:
@@ -27,11 +28,14 @@ class ComponentNodeStore:
     self.comp_nodes_base = ComponentNodesBase(self.ui_manager)
     self.comp_nodes_filtering = ComponentNodesFiltering(self.ui_manager)
     self.comp_nodes_morphology = ComponentNodesMorphology(self.ui_manager)
+    self.comp_nodes_special = ComponentNodesSpecial(self.ui_manager)
 
     self.comp_nodes_list = [
       self.comp_nodes_base,
       self.comp_nodes_filtering,
-      self.comp_nodes_morphology]
+      self.comp_nodes_morphology,
+      self.comp_nodes_special]
+    
     self.selected_category_index = 0
     self.selected_comp_node = self.comp_nodes_list[self.selected_category_index]
 

@@ -6,25 +6,35 @@
     "params": {}
   },
   "1": {
-    "category": "base",
-    "type": "grayscale",
-    "name": "Grayscale",
-    "params": {}
-  },
-  "2": {
     "category": "filtering",
     "type": "gaussian",
     "name": "Gaussian",
     "params": {
-      "ksize": 23
+      "ksize": 13
+    }
+  },
+  "2": {
+    "category": "special",
+    "type": "canny",
+    "name": "Canny",
+    "params": {
+      "tlower": 98,
+      "tupper": 244,
+      "aperture": 3
     }
   },
   "3": {
-    "category": "filtering",
-    "type": "gaussian",
-    "name": "Gaussian",
+    "category": "morphology",
+    "type": "dilate",
+    "name": "Dilate",
     "params": {
-      "ksize": 73
+      "ksize": 27
     }
+  },
+  "4": {
+    "category": "special",
+    "type": "contours",
+    "name": "Contours",
+    "params": {}
   }
 }

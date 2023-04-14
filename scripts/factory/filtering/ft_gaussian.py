@@ -17,11 +17,11 @@ class FLGaussian(NodeDetail):
     self.__config_ui_elements()
 
   def __config_ui_elements(self):
-    _rect = pygame.Rect(0, 0, 50, 20)
-    self.ui_txt_ksize= pygame_gui.elements.UILabel(relative_rect=_rect,
-              text=f'ksize: {self.ksize[0]}', 
+    _rect = pygame.Rect(0, 0, 60, 20)
+    self.ui_txt_ksize= pygame_gui.elements.UIButton(relative_rect=_rect,
+              text=f'ksize: {self.ksize[0]}', tool_tip_text="Kích thước của kernel (bộ lọc).",
               manager=self.ui_manager, container=self.ui_panel_config,
-              object_id=pygame_gui.core.ObjectID(class_id="#txt"))
+              object_id=pygame_gui.core.ObjectID(object_id="@btn_param",class_id="#btn"))
     
     _rect = pygame.Rect(0, 0, 150, 20)
     self.ui_slider_ksize = pygame_gui.elements.UIHorizontalSlider(relative_rect=_rect,
