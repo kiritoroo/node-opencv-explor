@@ -1,6 +1,7 @@
 import pygame
 import pygame_gui
 import json
+import os
 import assets.assets as ats
 import scripts.colors as cls
 import scripts.stores as sts
@@ -327,3 +328,7 @@ class Solution():
         action_long_desc = _dialog_msg,
         window_title ='Save successfully',
         manager = self.ui_manager)
+    
+  def remove_solution(self) -> None:
+    if os.path.exists(self.solution_path):
+      os.remove(self.solution_path)

@@ -76,10 +76,20 @@ class SolutionsHandle:
     self.ui_manager.process_events(event)
     for i in range(self.solution_count):
       self.solutions[i].events(event)
-
+    
     if event.type == pygame_gui.UI_BUTTON_PRESSED:
       if event.ui_element == self.ui_btn_new_solution:
         self.create_solution()
+
+      for i in range(self.solution_count):
+        if event.ui_element == self.solutions[i].ui_btn_delete:
+          if self.solution_count == 1: return
+          self.solutions[i].remove_solution()
+          del self.solutions[i]
+          self.solution_count -= 1
+          self.__config_rect_container()
+          self.__config_ui_elements()
+          self.__config_ui_btn_new_solution()
 
   def read_solutions(self, solutons_folder_path: str) -> None:
     self.solutons_folder_path = solutons_folder_path
