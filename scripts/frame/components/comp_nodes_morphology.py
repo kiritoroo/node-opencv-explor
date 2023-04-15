@@ -1,6 +1,6 @@
 import pygame
 import pygame_gui
-import json
+import orjson as json
 import assets.assets as ats
 import scripts.constants as cts
 
@@ -14,7 +14,7 @@ class ComponentNodesMorphology:
     self.size_btn_node = pygame.Rect(0, 0, 180, 40)
 
     with open(self.nodes_morphology_info_path, 'r', encoding='utf-8') as _file:
-      self.nodes_morphology_info_dict: dict = json.load(_file)
+      self.nodes_morphology_info_dict: dict = json.loads(_file.read())
 
       self.nodes_info_list = [
         {"category": v["category"],

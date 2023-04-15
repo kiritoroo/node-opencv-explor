@@ -5,6 +5,7 @@ from scripts.factory.base.factory_base import FactoryBase
 from scripts.factory.filtering.factory_filtering import FactoryFiltering
 from scripts.factory.morphology.factory_morphology import FactoryMorphology
 from scripts.factory.special.factory_special import FactorySpecial
+from scripts.factory.misc.factory_misc import FactoryMisc
 
 class NodeData:
   def __init__(self, node_catory: str, node_type: str, node_name: str, node_params: list) -> None:
@@ -24,6 +25,7 @@ class NodeData:
     _factory_filtering = FactoryFiltering()
     _factory_morphology = FactoryMorphology()
     _factory_special = FactorySpecial()
+    _factory_misc = FactoryMisc()
 
     if self.node_category == "base":
       self.node_detail = _factory_base.create_node(self.node_type, _default_image_cv)
@@ -37,6 +39,9 @@ class NodeData:
     elif self.node_category == "special":
       self.node_detail = _factory_special.create_node(self.node_type, _default_image_cv)
       self.node = Node(self.node_name, _factory_special.color_bg)
+    elif self.node_category == "misc":
+      self.node_detail = _factory_misc.create_node(self.node_type, _default_image_cv)
+      self.node = Node(self.node_name, _factory_misc.color_bg)
     else:
       self.node_detail = None
       self.node = None

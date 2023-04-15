@@ -86,7 +86,7 @@ class Solution():
     _left = self.handle_nodes_detail.list_node_detail[0].rect_container.left-self.current_padding_container_horizontal/2
     _top = self.handle_nodes_detail.list_node_detail[0].rect_container.top-self.current_padding_container_vertical/1.5
     _width = self.handle_nodes_detail.list_node_detail[self.handle_nodes_detail.node_detail_cout-1].rect_container.right-_left+self.current_padding_container_horizontal/2
-    _height = self.handle_nodes_detail.list_node_detail[self.handle_nodes_detail.node_detail_cout-1].rect_container.bottom-_top+self.current_padding_container_vertical/2
+    _height = self.handle_nodes_detail.list_node_detail[0].rect_container.bottom-_top+self.current_padding_container_vertical/2
     self.rect_container_node_detail = pygame.Rect(_left, _top, _width, _height)
 
   def __config_rect_label_node_detail(self):
@@ -195,7 +195,7 @@ class Solution():
   def read_solution(self, solution_path) -> None:
     self.solution_path = solution_path
     with open(self.solution_path, 'r') as _file:
-      self.solution_dict: dict = json.load(_file)
+      self.solution_dict: dict = json.loads(_file.read())
       for _, _node_info in self.solution_dict.items():
         self.node_data_count += 1
         _node_category = _node_info["category"]

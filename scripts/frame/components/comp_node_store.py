@@ -6,6 +6,7 @@ from scripts.frame.components.comp_nodes_base import ComponentNodesBase
 from scripts.frame.components.comp_nodes_filterring import ComponentNodesFiltering
 from scripts.frame.components.comp_nodes_morphology import ComponentNodesMorphology
 from scripts.frame.components.comp_nodes_special import ComponentNodesSpecial
+from scripts.frame.components.comp_nodes_misc import ComponentNodesMisc
 
 class ComponentNodeStore:
   def __init__(self, solution) -> None:
@@ -29,12 +30,14 @@ class ComponentNodeStore:
     self.comp_nodes_filtering = ComponentNodesFiltering(self.ui_manager)
     self.comp_nodes_morphology = ComponentNodesMorphology(self.ui_manager)
     self.comp_nodes_special = ComponentNodesSpecial(self.ui_manager)
+    self.comp_nodes_misc= ComponentNodesMisc(self.ui_manager)
 
     self.comp_nodes_list = [
       self.comp_nodes_base,
       self.comp_nodes_filtering,
       self.comp_nodes_morphology,
-      self.comp_nodes_special]
+      self.comp_nodes_special,
+      self.comp_nodes_misc]
     
     self.selected_category_index = 0
     self.selected_comp_node = self.comp_nodes_list[self.selected_category_index]
@@ -135,6 +138,18 @@ class ComponentNodeStore:
     for _, _param_value in node_info_dict["params"].items():
       _node_params.append(_param_value)
 
+    if _node_type == "vip":
+      _dialog_msg = f'''
+        Yêu cầu VIP để sử dụng tính năng này...
+      '''
+      _rect = pygame.Rect(0, 0, 400, 200)
+      _rect.center = pygame.math.Vector2(cts.SCREEN_WIDTH//2, cts.SCREEN_HEIGHT//2)
+      pygame_gui.windows.UIConfirmationDialog(rect = _rect,
+          action_long_desc = _dialog_msg,
+          window_title ='[VIP 0] ^_____^',
+          manager = self.ui_manager)
+      return
+    
     if _node_type != "original":
       self.solution.add_node_data(_node_category, _node_type, _node_name, _node_params)
       self.hide()

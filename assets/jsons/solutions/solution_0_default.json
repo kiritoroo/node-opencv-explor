@@ -1,0 +1,54 @@
+{
+  "0": {
+    "category": "base",
+    "type": "original",
+    "name": "Original",
+    "params": {}
+  },
+  "1": {
+    "category": "filtering",
+    "type": "gaussian",
+    "name": "Gaussian",
+    "params": {
+      "ksize": 5
+    }
+  },
+  "2": {
+    "category": "misc",
+    "type": "rescale",
+    "name": "[C] Rescale",
+    "params": {
+      "w": 872
+    }
+  },
+  "3": {
+    "category": "special",
+    "type": "canny",
+    "name": "[S] Canny",
+    "params": {
+      "tlower": 168,
+      "tupper": 255,
+      "aperture": 3
+    }
+  },
+  "4": {
+    "category": "special",
+    "type": "contours",
+    "name": "[S] Contours",
+    "params": {
+      "top": 6
+    }
+  },
+  "5": {
+    "category": "misc",
+    "type": "findlp",
+    "name": "[C] Find L.P",
+    "params": {}
+  },
+  "6": {
+    "category": "base",
+    "type": "grayscale",
+    "name": "[C] Grayscale",
+    "params": {}
+  }
+}

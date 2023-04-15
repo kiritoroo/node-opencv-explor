@@ -49,6 +49,9 @@ class NodesDetailHandle:
     for i in range(self.node_detail_cout):
       self.list_node_detail[i].draw(surface)
 
+    for i in range(self.node_detail_cout):
+      self.list_node_detail[i].ui_manager.draw_ui(surface)
+
   def update_all(self, delta_time: float) -> None:
     for i in range(self.node_detail_cout):
       self.list_node_detail[i].update(delta_time)
@@ -95,5 +98,6 @@ class NodesDetailHandle:
     self._reset_all_scale_ratio()
 
   def reset_image(self):
+    self.list_node_detail[0].set_image(sts.image_cv)
     for i in range(1, self.node_detail_cout):
       self.list_node_detail[i].set_image(self.list_node_detail[i-1].image_apply)

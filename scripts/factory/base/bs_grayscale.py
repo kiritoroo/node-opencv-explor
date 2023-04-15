@@ -23,9 +23,7 @@ class BSGrayscale(NodeDetail):
     self.image_raw = image_cv.copy()
     self.image_apply = image_cv.copy()
     self.image_display = image_cv.copy()
-
     self.__apply_effect()
-
     super().set_image(image_cv)
   
   def set_params(self):

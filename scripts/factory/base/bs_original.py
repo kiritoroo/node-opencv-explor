@@ -9,5 +9,11 @@ class BSOriginal(NodeDetail):
     self.size_panel_config = pygame.Rect(0, 0, 100, 30)
     super().__init__(self.node_name, self.color_bg, image)
 
+  def set_image(self, image_cv: np.matrix) -> None:
+    self.image_raw = image_cv.copy()
+    self.image_apply = image_cv.copy()
+    self.image_display = image_cv.copy()
+    super().set_image(image_cv)
+  
   def set_params(self):
     pass

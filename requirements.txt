@@ -2,3 +2,4 @@ pygame
 pygame_gui
 opencv-python
 numpy
+orjson

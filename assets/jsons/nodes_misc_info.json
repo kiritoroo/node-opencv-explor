@@ -1,0 +1,18 @@
+{
+  "1": {
+    "category": "misc",
+    "type": "rescale",
+    "name": "[C] Rescale",
+    "tooltip": "Rescale Node thay đổi kích thước của hình ảnh theo width.",
+    "params": {
+      "w": 500
+    }
+  },
+  "2": {
+    "category": "misc",
+    "type": "findlp",
+    "name": "[C] Find L.P",
+    "tooltip": "Rescale Node thay đổi kích thước của hình ảnh theo width.",
+    "params": {}
+  }
+}

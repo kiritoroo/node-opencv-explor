@@ -2,28 +2,28 @@
   "1": {
     "category": "base",
     "type": "original",
-    "name": "Original",
+    "name": "[C] Original",
     "tooltip": "Original Node đại diện cho hình ảnh đầu vào ban đầu mà không có bất kỳ sửa đổi nào.",
     "params": {}
   },
   "2": {
     "category": "base",
     "type": "grayscale",
-    "name": "Grayscale",
+    "name": "[C] Grayscale",
     "tooltip": "Grayscale Node chuyển đổi hình ảnh thành thang độ xám, chỉ chứa các sắc thái xám từ đen sang trắng.",
     "params": {}
   },
   "3": {
     "category": "base",
     "type": "invert",
-    "name": "Invert",
+    "name": "[C] Invert",
     "tooltip": "Inveret Node đảo ngược giá trị của ảnh, chuyển đổi các pixel sáng thành tối và ngược lại. Thường được sử dụng để tạo hiệu ứng ảnh âm bản hoặc chuyển đổi giữa các đối tượng sáng và đối tượng tối trong xử lý ảnh.",
     "params": {}
   },
   "4": {
     "category": "base",
     "type": "logtranf",
-    "name": "Log Transform",
+    "name": "[B] Log Transform",
     "tooltip": "Log Transform Node điều chỉnh độ sáng của ảnh bằng cách áp dụng hàm logarit.",
     "params": {
       "c": 35
@@ -32,7 +32,7 @@
   "5": {
     "category": "base",
     "type": "gamma",
-    "name": "Gamma Correction",
+    "name": "[B] Gamma Correction",
     "tooltip": "Gamma Node biến đổi độ sáng của ảnh được định nghĩa bởi công thức S = c * R ** y.",
     "params": {
       "c": 1,

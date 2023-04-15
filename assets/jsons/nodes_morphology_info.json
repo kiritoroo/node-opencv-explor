@@ -2,7 +2,7 @@
   "1": {
     "category": "morphology",
     "type": "open",
-    "name": "Open",
+    "name": "[A] Open",
     "tooltip": "Open Node là một phép toán kết hợp giữa phép mở rộng (dilate) và phép co (erode). Kết quả của phép toán Open là làm mở rộng các vùng trắng trong ảnh, đồng thời giảm nhiễu và điền vào các lỗ hở giữa các đối tượng trắng.",
     "params": {
       "ksize": 3
@@ -11,7 +11,7 @@
   "2": {
     "category": "morphology",
     "type": "close",
-    "name": "Close",
+    "name": "[A] Close",
     "tooltip": "Close Node là một phép toán kết hợp giữa phép co (erode) và phép mở rộng (dilate). Kết quả của phép toán Close là làm co lại các vùng trắng trong ảnh, đồng thời lấp đầy các lỗ hở giữa các đối tượng trắng.",
     "params": {
       "ksize": 3
@@ -20,7 +20,7 @@
   "3": {
     "category": "morphology",
     "type": "erode",
-    "name": "Erode",
+    "name": "[B] Erode",
     "tooltip": "Erode Node là một phép toán thu nhỏ (co) đối tượng trắng trong ảnh bằng cách xóa bỏ các pixel trắng ở rìa của đối tượng. Kết quả của phép toán Erode là làm co lại các vùng trắng trong ảnh, làm giảm kích thước và thay đổi hình dạng của đối tượng.",
     "params": {
       "ksize": 3
@@ -29,7 +29,7 @@
   "4": {
     "category": "morphology",
     "type": "dilate",
-    "name": "Dilate",
+    "name": "[B] Dilate",
     "tooltip": "Dilation Node là một phép toán làm dày (dãn) đối tượng trắng trong ảnh bằng cách thêm các pixel trắng vào các điểm lân cận của đối tượng. Kết quả của phép toán Dilation là làm dày lại các vùng trắng trong ảnh, làm tăng kích thước và thay đổi hình dạng của đối tượng.",
     "params": {
       "ksize": 3

@@ -1,5 +1,6 @@
 import pygame
 import pygame.gfxdraw
+import numpy as np
 
 def draw_rect_bordered(surface, width, height, border_thickness, color, border_color):
   pygame.draw.rect(surface, color, (border_thickness, border_thickness, width, height), 0)

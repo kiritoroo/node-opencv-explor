@@ -110,7 +110,6 @@ class NodeDetail():
     uts.draw_rect_bordered_rounded(surface, self.rect_image_container, self.color_bg_image, self.color_border, 0, self.current_size_border)
     surface.blit(self.surf_image, self.rect_image)
     self.node.draw(surface)
-    self.ui_manager.draw_ui(surface)
 
   def update(self, delta_time: float) -> None:
     self.node.update(delta_time)

@@ -2,7 +2,7 @@
   "1": {
     "category": "special",
     "type": "canny",
-    "name": "Canny",
+    "name": "[S] Canny",
     "tooltip": "Canny Node phát hiện biên cạnh trong ảnh bằng thuật toán Canny.",
     "params": {
       "tlower": 100,
@@ -13,8 +13,24 @@
   "2": {
     "category": "special",
     "type": "contours",
-    "name": "Contours",
+    "name": "[S] Contours",
     "tooltip": "Contours Node tìm đường viền (đường biên) của các vùng được phân đoạn trong ảnh, kết quả là một danh sách các đường viền.",
+    "params": {
+      "top": 30
+    }
+  },
+  "4": {
+    "category": "special",
+    "type": "vip",
+    "name": "[SSS] Machine Learning",
+    "tooltip": "Yêu cầu VIP 9 để sử dụng, tính năng cực xịn...",
+    "params": {}
+  },
+  "5": {
+    "category": "special",
+    "type": "vip",
+    "name": "[SSS] Deep Learning",
+    "tooltip": "Yêu cầu VIP 10 để sử dụng, tính năng cực xịn...",
     "params": {}
   }
 }

@@ -15,4 +15,4 @@ def load_image_cv(file_path: str) -> np.matrix:
   return image_cv
 
 scale_ratio: float = 1
-image_cv = load_image_cv(ats.IMAGE_DEFAULT_PATH)
+image_cv = load_image_cv_default()
