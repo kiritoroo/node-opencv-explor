@@ -4,37 +4,5 @@
     "type": "original",
     "name": "Original",
     "params": {}
-  },
-  "1": {
-    "category": "filtering",
-    "type": "gaussian",
-    "name": "Gaussian",
-    "params": {
-      "ksize": 7
-    }
-  },
-  "2": {
-    "category": "special",
-    "type": "canny",
-    "name": "[S] Canny",
-    "params": {
-      "tlower": 100,
-      "tupper": 200,
-      "aperture": 3
-    }
-  },
-  "3": {
-    "category": "special",
-    "type": "contours",
-    "name": "[S] Contours",
-    "params": {
-      "top": 30
-    }
-  },
-  "4": {
-    "category": "misc",
-    "type": "findlp",
-    "name": "[C] Find L.P",
-    "params": {}
   }
 }
