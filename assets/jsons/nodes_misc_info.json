@@ -12,7 +12,7 @@
     "category": "misc",
     "type": "findlp",
     "name": "[C] Find L.P",
-    "tooltip": "Rescale Node thay đổi kích thước của hình ảnh theo width.",
+    "tooltip": "Tìm biển số xe dựa vào contours có 4 đường bo góc",
     "params": {}
   }
 }

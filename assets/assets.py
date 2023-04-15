@@ -1,5 +1,5 @@
 IMAGE_FOLDER_PATH='./assets/images'
-IMAGE_DEFAULT_PATH= f'{IMAGE_FOLDER_PATH}/image_default2.jpg'
+IMAGE_DEFAULT_PATH= f'{IMAGE_FOLDER_PATH}/car39.jpg'
 
 FONT_FOLDER_PATH='./assets/fonts'
 FONT_POPPINS_LIGHT_PATH=f'{FONT_FOLDER_PATH}/poppins_light.ttf'
@@ -21,3 +21,5 @@ NODES_FILTERING_INFO_PATH=f'{JSON_FOLDER_PATH}/nodes_filtering_info.json'
 NODES_MORPHOLOGY_INFO_PATH=f'{JSON_FOLDER_PATH}/nodes_morphology_info.json'
 NODES_SPECIAL_INFO_PATH=f'{JSON_FOLDER_PATH}/nodes_special_info.json'
 NODES_MISC_INFO_PATH=f'{JSON_FOLDER_PATH}/nodes_misc_info.json'
+
+TESSERACT_ENGINE_PATH=f'./assets/tesseract-engine/tesseract.exe'

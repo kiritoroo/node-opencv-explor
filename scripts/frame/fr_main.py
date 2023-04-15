@@ -1,12 +1,14 @@
 import pygame
 import pygame_gui
-import platform
 import os
-import getpass
+import pytesseract
+import cv2 as cv
 from scripts.handle.hd_solutions import SolutionsHandle
 import assets.assets as ats
 import scripts.stores as sts
 import scripts.constants as cts
+
+pytesseract.pytesseract.tesseract_cmd = ats.TESSERACT_ENGINE_PATH
 
 class Frame:
   def __init__(self, surface: pygame.Surface) -> None:
@@ -16,6 +18,7 @@ class Frame:
     self.handle_solutions = SolutionsHandle(ats.SOLUTION_FOLDER_PATH)
     self.is_move = False
     self.is_select_image = False
+    self.ui_image_license_plate = None
 
     self._start()
 
@@ -103,12 +106,39 @@ class Frame:
                       'left': 'left'})
     
     _rect = pygame.Rect(0, 0, 120, 40)
-    _rect.center = pygame.math.Vector2(self.ui_panel_main_container.rect.centerx-20, self.ui_panel_main_container.rect.bottom-100)
     self.ui_btn_load_image = pygame_gui.elements.UIButton(relative_rect=_rect,
               text='Load image', 
               manager=self.ui_manager, container=self.ui_panel_main_container,
               object_id=pygame_gui.core.ObjectID(object_id="@btn_load_image", class_id="#btn"))
+    self.ui_btn_load_image.set_position(pygame.math.Vector2(
+      self.ui_panel_image.rect.left+70, self.ui_panel_image.rect.bottom + 20
+    ))
 
+
+    _rect = pygame.Rect(0, 0, 250, 200)
+    _rect.center = pygame.math.Vector2(self.ui_panel_main_container.rect.centerx, self.ui_panel_main_container.rect.bottom-220)
+    self.ui_panel_recognition = pygame_gui.elements.UIPanel(relative_rect=_rect,
+              manager=self.ui_manager,
+              object_id=pygame_gui.core.ObjectID(object_id="@panel_image", class_id="#panel"))
+    
+    _rect = pygame.Rect(0, 0, 150, 30)
+    _rect.bottomleft = (self.ui_panel_recognition.rect.width/2-150/2, -20)
+    self.ui_txt_image_license_plate = pygame_gui.elements.UILabel(relative_rect=_rect,
+              text=f'License Plate is: ...', 
+              manager=self.ui_manager, container=self.ui_panel_recognition,
+              object_id=pygame_gui.core.ObjectID(object_id="@txt_image_size", class_id="#txt"),
+              anchors={'bottom': 'bottom',
+                      'left': 'left'})
+    
+    _rect = pygame.Rect(0, 0, 120, 40)
+    self.ui_btn_recognition = pygame_gui.elements.UIButton(relative_rect=_rect,
+              text='Recognition', 
+              manager=self.ui_manager, container=self.ui_panel_main_container,
+              object_id=pygame_gui.core.ObjectID(object_id="@btn_load_image", class_id="#btn"))
+    self.ui_btn_recognition.set_position(pygame.math.Vector2(
+      self.ui_panel_recognition.rect.left+70, self.ui_panel_recognition.rect.bottom + 20
+    ))
+    
   def __config_ui_image(self):
     self.ui_manager.ui_group.remove(self.ui_image_cv)
     _surf_image_default = pygame.surfarray.make_surface(self.image_cv).convert_alpha()
@@ -131,6 +161,13 @@ class Frame:
 
     self.ui_txt_image_size.set_text(f'{_surf_image_default.get_width()} x {_surf_image_default.get_height()} pixel')
   
+    self.ui_btn_load_image.set_position(pygame.math.Vector2(
+      self.ui_panel_image.rect.left+70, self.ui_panel_image.rect.bottom + 20
+    ))
+
+    if self.ui_image_license_plate is not None:
+      self.ui_manager.ui_group.remove(self.ui_image_license_plate)
+    self.ui_txt_image_license_plate.set_text("Nothing...")
 
   def _start(self):
     self.__config_ui_elements()
@@ -172,7 +209,9 @@ class Frame:
       if event.ui_element == self.ui_btn_close_panel_main:
         self.__hide_panel_main()
       if event.ui_element == self.ui_btn_open_panel_main:
-        self._show_panel_main()
+        self.__show_panel_main()
+      if event.ui_element == self.ui_btn_recognition:
+        self.__recognition_license_plate()
 
     if event.type == pygame.MOUSEWHEEL:
       if not self.is_select_image:
@@ -228,7 +267,7 @@ class Frame:
     self.ui_btn_load_image.visible = False
     self.ui_btn_open_panel_main.visible = True
 
-  def _show_panel_main(self) -> None:
+  def __show_panel_main(self) -> None:
     self.ui_panel_main_container.visible = True
     self.ui_panel_image.visible = True
     self.ui_btn_close_panel_main.visible = True
@@ -236,3 +275,38 @@ class Frame:
     self.ui_txt_image_size.visible = True
     self.ui_btn_load_image.visible = True
     self.ui_btn_open_panel_main.visible = False
+
+
+  def __recognition_license_plate(self) -> None:
+    _list_candidates = self.handle_solutions.get_image_candidates_list()
+    for i in range(len(_list_candidates)):
+      _image = _list_candidates[i]
+      _image_flip = cv.flip(_image.copy(), 0)
+      _image_rotate = cv.rotate(_image_flip, cv.ROTATE_90_CLOCKWISE)
+
+      predicted_result = pytesseract.image_to_string(_image_rotate, lang ='eng', config ='--oem 3 -l eng --psm 6 -c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
+      filter_predicted_result = "".join(predicted_result.split()).replace(":", "").replace("-", "")
+      
+      if self.ui_image_license_plate is not None:
+        self.ui_manager.ui_group.remove(self.ui_image_license_plate)
+
+      if len(filter_predicted_result) > 2:
+        self.ui_txt_image_license_plate.set_text(filter_predicted_result)
+
+        _surf_image_default = pygame.surfarray.make_surface(_image).convert_alpha()
+        _img_width = 220
+        _image_scale_ratio = _img_width / _surf_image_default.get_width()
+        _image_height = int(_surf_image_default.get_height() * _image_scale_ratio)
+        _surf_image = pygame.transform.smoothscale(_surf_image_default, (_img_width, _image_height))
+        _rect = pygame.Rect(0, 0, _img_width, _image_height)
+        self.ui_image_license_plate = pygame_gui.elements.UIImage(
+                relative_rect = _rect, 
+                image_surface = _surf_image,
+                manager = self.ui_manager)
+        self.ui_image_license_plate.set_position(pygame.math.Vector2(
+          self.ui_panel_recognition._rect.left+15,
+          self.ui_panel_recognition.rect.top+15))
+        return  
+      else:
+        self.ui_txt_image_license_plate.set_text("Nothing...")
+    

@@ -1,5 +1,6 @@
 pygame
 pygame_gui
 opencv-python
+pytesseract
 numpy
 orjson

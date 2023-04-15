@@ -34,5 +34,23 @@
     "params": {
       "ksize": 3
     }
+  },
+  "5": {
+    "category": "morphology",
+    "type": "tophat",
+    "name": "[A] TopHat",
+    "tooltip": "TopHat Node tìm ra các đối tượng nhỏ hoặc chi tiết trong ảnh, có thể là các điểm sáng hoặc điểm tối so với nền ảnh ban đầu.",
+    "params": {
+      "ksize": 3
+    }
+  },
+  "6": {
+    "category": "morphology",
+    "type": "blackhat",
+    "name": "[A] BlackHat",
+    "tooltip": "BlackHat Node làm nổi bật những đối tượng nhỏ, nhiễu, hoặc cạnh của đối tượng trong ảnh.",
+    "params": {
+      "ksize": 3
+    }
   }
 }

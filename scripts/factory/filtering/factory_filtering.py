@@ -2,6 +2,8 @@ import numpy as np
 from scripts.core.node_detail import NodeDetail
 from scripts.factory.filtering.ft_gaussian import FLGaussian 
 from scripts.factory.filtering.ft_median import FLMedian
+from scripts.factory.filtering.ft_max import FTMax 
+from scripts.factory.filtering.ft_min import FTMin
 import scripts.colors as cls
 
 class FactoryFiltering:
@@ -13,5 +15,9 @@ class FactoryFiltering:
       return FLGaussian(self.color_bg, image_cv)
     elif node_type == "median":
       return FLMedian(self.color_bg, image_cv)
+    elif node_type == "max":
+      return FTMax(self.color_bg, image_cv)
+    elif node_type == "min":
+      return FTMin(self.color_bg, image_cv)
     else:
       return None    
