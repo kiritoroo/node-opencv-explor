@@ -1,7 +1,8 @@
 # License Plate Recognition
 ### Setup
-  1. python environment: 'python -m venv env'
-  2. install package: 'python -m pip install -r requirements.txt'
+  1. create environment: 'python -m venv env'
+  2. enable environment: '.\env\Scripts\activate'
+  3. install package: 'python -m pip install -r requirements.txt'
 
 ### Environment
   - enable: '.\env\Scripts\activate'
