@@ -41,6 +41,30 @@
       }
     }
   },
+  "@btn_start": {
+    "colours":
+    {
+      "active_bg": "#EEF4FC,#F9F4F7,90"
+    },
+    "font":
+    {
+      "name": "poppins",
+      "size": "18",
+      "bold": "0"
+    }
+  },
+  "@btn_back": {
+    "colours":
+    {
+      "active_bg": "#EEF4FC,#F9F4F7,90"
+    },
+    "font":
+    {
+      "name": "poppins",
+      "size": "15",
+      "bold": "0"
+    }
+  },
   "@btn_zoom": {
     "colours":
     {
@@ -203,6 +227,74 @@
     {
         "name": "poppins",
         "size": "12",
+        "bold": "0"
+    }
+  },
+  "@txt_project_title": {
+    "colours":
+    {
+      "normal_text": "#5A606C"
+    },
+    "font":
+    {
+        "name": "poppins",
+        "size": "40",
+        "bold": "1"
+    }
+  },
+  "@txt_project_advisor": {
+    "colours":
+    {
+      "normal_text": "#5A606C"
+    },
+    "font":
+    {
+      "name": "pro",
+      "size": "20",
+      "regular_resource": {
+        "package": "assets.fonts",
+        "resource": "pro_light.ttf"
+      },
+      "bold": 0
+    }
+  },
+  "@txt_member_name": {
+    "colours":
+    {
+      "normal_text": "#5A606C"
+    },
+    "font":
+    {
+      "name": "pro",
+      "size": "25",
+      "regular_resource": {
+        "package": "assets.fonts",
+        "resource": "pro_light.ttf"
+      },
+      "bold": 1
+    }
+  },
+  "@txt_member_id": {
+    "colours":
+    {
+      "normal_text": "#5A606C"
+    },
+    "font":
+    {
+        "name": "poppins",
+        "size": "20",
+        "bold": "1"
+    }
+  },
+  "@txt_member_email": {
+    "colours":
+    {
+      "normal_text": "#5A606C"
+    },
+    "font":
+    {
+        "name": "poppins",
+        "size": "15",
         "bold": "0"
     }
   },

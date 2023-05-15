@@ -64,6 +64,7 @@ class NodeDetail():
   def __config_rect_image(self):
     _image_scale_ratio = self.image_width / self.surf_image_default.get_width()
     self.image_height = int(self.surf_image_default.get_height() * _image_scale_ratio)
+
     self.surf_image = pygame.transform.smoothscale(self.surf_image_default, (self.image_width, self.image_height))
     self.rect_image = self.surf_image.get_rect(center=self.position)
 

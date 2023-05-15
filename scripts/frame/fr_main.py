@@ -11,9 +11,10 @@ import scripts.constants as cts
 pytesseract.pytesseract.tesseract_cmd = ats.TESSERACT_ENGINE_PATH
 
 class Frame:
-  def __init__(self, surface: pygame.Surface) -> None:
-    self.image_cv = sts.image_cv
+  def __init__(self, handler, surface: pygame.Surface) -> None:
     self.surface = surface
+    self.handler = handler
+    self.image_cv = sts.image_cv
     self.scale_ratio = sts.scale_ratio
     self.handle_solutions = SolutionsHandle(ats.SOLUTION_FOLDER_PATH)
     self.is_move = False
@@ -138,6 +139,12 @@ class Frame:
     self.ui_btn_recognition.set_position(pygame.math.Vector2(
       self.ui_panel_recognition.rect.left+70, self.ui_panel_recognition.rect.bottom + 20
     ))
+
+    _rect = pygame.Rect(0, 0, 150, 50)
+    _rect.center = pygame.math.Vector2(100, cts.SCREEN_HEIGHT-50)
+    self.ui_btn_back = pygame_gui.elements.UIButton(relative_rect=_rect,
+              text="Back Intro", manager=self.ui_manager,
+              object_id=pygame_gui.core.ObjectID(object_id="@btn_back", class_id="#btn"))
     
   def __config_ui_image(self):
     self.ui_manager.ui_group.remove(self.ui_image_cv)
@@ -195,6 +202,8 @@ class Frame:
     self.handle_solutions.events_all(event)
 
     if event.type == pygame_gui.UI_BUTTON_PRESSED:
+      if event.ui_element == self.ui_btn_back:
+        self.handler.set_frame('frame_intro')
       if not self.is_select_image:
         if event.ui_element == self.ui_btn_zoomin:
           if self.scale_ratio < 5:
@@ -265,6 +274,9 @@ class Frame:
     self.ui_image_cv.visible = False
     self.ui_txt_image_size.visible = False
     self.ui_btn_load_image.visible = False
+    self.ui_panel_recognition.visible = False
+    self.ui_txt_image_license_plate.visible = False
+    self.ui_btn_recognition.visible = False
     self.ui_btn_open_panel_main.visible = True
 
   def __show_panel_main(self) -> None:
@@ -274,8 +286,10 @@ class Frame:
     self.ui_image_cv.visible = True
     self.ui_txt_image_size.visible = True
     self.ui_btn_load_image.visible = True
+    self.ui_panel_recognition.visible = True
+    self.ui_txt_image_license_plate.visible = True
+    self.ui_btn_recognition.visible = True
     self.ui_btn_open_panel_main.visible = False
-
 
   def __recognition_license_plate(self) -> None:
     _list_candidates = self.handle_solutions.get_image_candidates_list()

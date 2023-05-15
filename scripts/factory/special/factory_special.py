@@ -2,6 +2,7 @@ import numpy as np
 from scripts.core.node_detail import NodeDetail
 from scripts.factory.special.sp_canny import SPCanny 
 from scripts.factory.special.sp_contours import SPContours 
+from scripts.factory.special.sp_machine_learning import SPMachineLearning
 import scripts.colors as cls
 
 class FactorySpecial:
@@ -13,5 +14,7 @@ class FactorySpecial:
       return SPCanny(self.color_bg, image_cv)
     elif node_type == "contours":
       return SPContours(self.color_bg, image_cv)
+    elif node_type == "machine_learning":
+      return SPMachineLearning(self.color_bg, image_cv)
     else:
-      return None    
+      return None

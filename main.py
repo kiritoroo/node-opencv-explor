@@ -3,6 +3,7 @@ import time, sys
 import scripts.constants as cst
 import scripts.colors as cls
 import scripts.frame.fr_main as frame
+from scripts.handle import hd_frame
 
 class Canvas:
 	def __init__(self) -> None:
@@ -13,7 +14,7 @@ class Canvas:
 			cst.SCREEN_WIDTH, cst.SCREEN_HEIGHT
 		))
 
-		self.frame = frame.Frame(self.canvas)
+		self.frame_handle = hd_frame.FrameHandle(self.canvas)
 
 	def run(self):
 		_last_time = time.time()
@@ -25,11 +26,11 @@ class Canvas:
 				if event.type == pygame.QUIT:
 					pygame.quit()
 					sys.exit()
-				self.frame.events(event)
-			
+				self.frame_handle.current_frame.events(event)
+
 			self.canvas.fill(cls.WHITE)
-			self.frame.update(_delta_time)
-			self.frame.render(self.canvas)
+			self.frame_handle.current_frame.update(_delta_time)
+			self.frame_handle.current_frame.render(self.canvas)
 
 			pygame.display.update()
 			self.clock.tick(cst.FRAME_RATE)

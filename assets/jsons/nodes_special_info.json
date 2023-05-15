@@ -21,16 +21,9 @@
   },
   "4": {
     "category": "special",
-    "type": "vip",
+    "type": "machine_learning",
     "name": "[SSS] Machine Learning",
-    "tooltip": "Yêu cầu VIP 9 để sử dụng, tính năng cực xịn...",
-    "params": {}
-  },
-  "5": {
-    "category": "special",
-    "type": "vip",
-    "name": "[SSS] Deep Learning",
-    "tooltip": "Yêu cầu VIP 10 để sử dụng, tính năng cực xịn...",
+    "tooltip": "Tính năng thử nghiệm.",
     "params": {}
   }
 }
