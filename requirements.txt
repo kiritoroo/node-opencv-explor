@@ -4,4 +4,3 @@ opencv-python
 pytesseract
 numpy
 orjson
-tensorflow
